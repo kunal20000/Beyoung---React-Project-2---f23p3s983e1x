@@ -1,0 +1,25 @@
+.product-container{
+    margin-top: 50px;
+    margin-left: 70px;
+    margin-right: 100px;
+}
+.men-clothing{
+    display: flex;
+    gap: 200px;
+}
+.heading-men-clothing{
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0px 0px 20px 0px;
+}
+
+.men-clothing-main div p{
+    color: #000;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 22px;
+    
+}

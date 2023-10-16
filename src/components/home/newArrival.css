@@ -1,0 +1,26 @@
+.big-saving-zone .saving-zone1 {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #343434;
+    border-bottom: 1px solid #f9eb28;
+    text-align: left;
+    margin: 60px 50px 10px 100px;
+    
+    display: inline-block;
+  }
+  
+  .big-saving-zone img {
+    width: 275px;
+  }
+  .saving-zone-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .saving-zone-2 button{
+    width: 50px;
+    height: 80px;
+    border: none;
+  
+  }
