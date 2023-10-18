@@ -1,0 +1,95 @@
+.login--container-main h5{
+    text-align: center;
+    font-size: 34px;
+    margin: 0;
+    font-weight: 400;
+}
+.main-container-for-both{
+    display: flex;
+    margin: 20px 85px;
+    align-items: center;
+    gap: 2.5rem;
+
+}
+.left-side-login{
+   width: 40%;
+   border: 1px solid #dcdada;
+   padding: 20px 20px;
+   border-radius: 5px;
+   height: 200px;
+}
+.left-side-login h5{
+    text-align: start;
+    margin: 0px 0px 6px 0px;
+    font-size: 17px;
+    color: #434343;
+    font-weight: 700;
+}
+.left-side-login p{
+    margin: 0;
+}
+.left-side-login input{
+    width: 95%;
+    border: 1px solid #dcdada;
+    height: 30px;
+    border-radius: 5px;
+    padding: 6px 6px;
+    margin-top: 20px;
+}
+.left-side-login button{
+    margin: 15px 0px 0px 0px;
+    background: #000;
+    border: none;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 550;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.left-side-login .for-span-required{
+    margin-top: 50px;
+    color: #f00;
+    padding-top: 50px;
+}
+.right-side-login{
+    margin-top: 20px;
+    width: 45%;
+}
+.right-side-login>b{
+    font-size: 18px;
+    font-weight: 500;
+   
+    
+}
+.right-side-login .heading-p1 svg{
+    color: #434343;
+}
+.right-side-login .heading-p1{
+    align-items: center;
+}
+.right-side-login a{
+    cursor: pointer;
+    font-weight: 500;
+    color: #434343;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+.right-side-login a img{
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 10px
+}
+.right-side-login label{
+    line-height: 20px;
+    display: block;
+    padding-top: 10px;
+    color: rgba(0, 0, 0, 2);
+}
+.right-side-login p{
+    color: red;
+    font-size: 15px;
+    font-weight: 400;
+
+}

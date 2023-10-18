@@ -1,7 +1,7 @@
 import axios from "axios"
 import { getHeaderWithProjectIdAndBody, headerWithProjectIdOnly } from "./getHeader"
 
-export const apiURL = 'https://academics.newtonschool.co/api/v1'
+export const apiURL = 'https://academics.newtonschool.co/';
 
 
 export const getProductsBySearch = async (page, filter)=>{
@@ -32,12 +32,12 @@ export const getProductsBySearch = async (page, filter)=>{
 
 export const getProductById = async (id)=>{
     const headers = headerWithProjectIdOnly();
-    const body = getHeaderWithProjectIdAndBody();
+    
     try {
         const res = await axios.get(
-            `${apiURL}/ecommerce/product/${id}`,
-            headers,
-            body
+            `https://academics.newtonschool.co/api/v1/ecommerce/product/${id}`,
+            headers
+            
         )
        return res.data.data
         
