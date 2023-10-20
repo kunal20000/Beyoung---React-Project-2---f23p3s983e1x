@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
+import { Badge } from "@mui/material";
 import { ReactComponent as LocationLogo } from "../asset/location.svg";
 import { ReactComponent as BeyoungLogo } from "../asset/beyoung.svg";
 import { ReactComponent as SearchLogo } from "../asset/searchbar.svg";
@@ -8,8 +9,12 @@ import { ReactComponent as WishListLogo } from "../asset/wishlist.svg";
 import { ReactComponent as CartLogo } from "../asset/cart.svg";
 import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
-
+import SignUp from "./SignUp";
 import Login from "./Login";
+
+import MyAccountModal from "./MyAccountModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const customStyles = {
   content: {
@@ -23,15 +28,43 @@ const customStyles = {
     border: "none",
   },
 };
-const navbar = () => {
+const navbar = ({ products }) => {
+  const handleLogout = () => {
+    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("authToken");
+    toast.success("Logged Out Successfully");
+  };
+  const isLoggedIn = sessionStorage.getItem("userInfo");
+
   const navigate = useNavigate(null);
 
   const [showModal, setShowModal] = useState(false);
-
-  const openLoginModal = () => {
+  const openLoginModal = (e) => {
+    e.preventDefault();
     setShowModal(true);
   };
+  const closeLoginModal = () => {
+    setShowModal(false);
+  };
 
+  const [showModalSignUp, SetShowModalSignUp] = useState(false);
+  const openSignUp = (e) => {
+    e.preventDefault();
+    SetShowModalSignUp(true);
+  };
+  const closeSignUpModal = () => {
+    SetShowModalSignUp(false);
+  };
+
+  const [modalHome, setModalHome] = useState(false);
+  const openMyAccountModal = () => {
+    setModalHome(true);
+    console.log("true");
+  };
+
+  const closeMyAccountModal = () => {
+    setModalHome(false);
+  };
   return (
     <header>
       <div className="navbar">
@@ -51,15 +84,33 @@ const navbar = () => {
               </a>
             </div>
             <div className="rightSlide">
-              <Link
-                id="loginBtn"
-                onClick={openLoginModal}
-                className="activeBtnLogin"
-              >
-                Log In
-              </Link>
+              {!isLoggedIn ? (
+                <Link
+                  id="loginBtn"
+                  onClick={openLoginModal}
+                  className="activeBtnLogin"
+                >
+                  Log In
+                </Link>
+              ) : (
+                <Link
+                  id="loginBtn"
+                  onClick={openMyAccountModal}
+                  className="activeBtnLogin"
+                >
+                  My Account
+                </Link>
+              )}
 
-              <Link id="registerBtn">Signup</Link>
+              {!isLoggedIn ? (
+                <Link id="registerBtn" onClick={openSignUp}>
+                  Signup
+                </Link>
+              ) : (
+                <Link id="registerBtn" onClick={handleLogout}>
+                  Logout
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -76,20 +127,25 @@ const navbar = () => {
               <div>
                 <ul className="menuBar">
                   <li className="menu-top">
-                    <NavLink className="menu-title" to={"/products?gender=men"}>
+                    <NavLink
+                      className="menu-title"
+                      to={`/productslist?gender=men`}
+                    >
                       Men
                     </NavLink>
                   </li>
                   <li className="menu-top">
                     <NavLink
                       className="menu-title"
-                      to={"/products?gender=woman"}
+                      to={`/productslistcomponent?gender=Woman`}
                     >
                       Woman
                     </NavLink>
                   </li>
                   <li className="menu-top">
-                    <NavLink className="menu-title">COMBOS</NavLink>
+                    <NavLink className="menu-title" to={`/products`}>
+                      COMBOS
+                    </NavLink>
                   </li>
                   <li className="menu-top">
                     <NavLink className="menu-title">JOGGERS</NavLink>
@@ -104,20 +160,28 @@ const navbar = () => {
               </div>
             </div>
             <div className="right">
-              <a className="searchBar" href="#">
+              <Link className="searchBar" href="#">
                 <SearchLogo />
-              </a>
-              <NavLink to="/wishlist" className="wishlist-icon">
+              </Link>
+              <Link to="/wishlist" className="wishlist-icon">
                 <WishListLogo />
-              </NavLink>
-              <NavLink className="cart-icon" to="/cart">
-                <CartLogo />
-              </NavLink>
+              </Link>
+              <Link className="cart-icon" to={`/cart`}>
+                <Badge>
+                  <CartLogo />
+                </Badge>
+              </Link>
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
-      <Login isOpen={showModal} closeModal={setShowModal} />
+      <Login isOpen={showModal} closeModal={closeLoginModal} />
+      <SignUp isOpen={showModalSignUp} closeModal={closeSignUpModal} />
+      <MyAccountModal
+        isOpenHomeModal={modalHome}
+        closeModal={closeMyAccountModal}
+      />
     </header>
   );
 };

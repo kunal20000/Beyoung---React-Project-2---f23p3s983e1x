@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./product.css";
-import { apiURL, getProductById } from "../utils/getProductApi";
+import {
+  apiURL,
+  getProductById,
+  getProductsBySearch,
+} from "../utils/getProductApi";
 import axios from "axios";
 import {
   getAuthHeaderConfig,
@@ -27,6 +31,7 @@ const Products = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
+
   return (
     <div className="product-container">
       <div className="men-clothing">
@@ -46,15 +51,17 @@ const Products = () => {
           </div>
           <div className="productListContainer">
             {product.map((pro, id) => {
-               const { name, price, _id, displayImage, subCategory } = pro;
+              const { name, price, _id, displayImage, subCategory } = pro;
               return (
-              
-                  <div className="product-container-male" key={id}>
-                    <Link className="productCotainerStart" to={`/products/${_id}`}>
+                <div className="product-container-male" key={id}>
+                  <Link
+                    className="productCotainerStart"
+                    to={`/products/${_id}`}
+                  >
                     <a className="for-man-image" href="#">
                       <img
                         className="image-for-male"
-                        src={pro.displayImage}
+                        src={displayImage}
                         alt=""
                       />
                       <div className="heart-icon">
@@ -68,9 +75,8 @@ const Products = () => {
                       &nbsp;
                       <span className="inline-elements">(50%off)</span>
                     </div>
-                    </Link>
-                  </div>
-               
+                  </Link>
+                </div>
               );
             })}
           </div>

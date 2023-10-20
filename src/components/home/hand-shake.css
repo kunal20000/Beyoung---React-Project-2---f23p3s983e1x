@@ -1,9 +1,19 @@
-.hand-shake-container{
-    width: 100%;
-    margin-top: 50px;
-    margin-left: 100px;
+.hand-shake-container {
+  width: 100%;
+  margin-top: 50px;
+  margin-left: 100px;
 }
-.hand-shake-container img{
-    text-align: center;
-    width: 1170px;
+.hand-shake-container img {
+  text-align: center;
+  width: 1170px;
+}
+@media screen and (max-width: 768px) {
+    .hand-shake-container{
+        margin: 0;
+    }  
+  .hand-shake-container img {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }

@@ -11,7 +11,7 @@ import News from "./News";
 import MenCategories from "./Men/MenCategories";
 import WomanCategories from "./Woman/WomanCategories";
 import HandShirtsBetter from "./HandShirtsBetter";
-const home = () => {
+const Home = () => {
   return (
     <div className="main-home">
       <ImageSlider />
@@ -29,4 +29,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

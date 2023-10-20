@@ -1,5 +1,5 @@
 .product-component-container{
-    max-width: 950px;
+    max-width: 1050px;
     text-align: center;
     margin: 30px auto;
     padding: 0 15px;
@@ -15,7 +15,7 @@
    width: 450px;
 }
 .product-right{
-   
+   width: 100%;
 }
 .product-right h5{
     font-style: normal;
@@ -140,3 +140,114 @@ span.discounted-text {
     fill: rgba(0, 0, 0, 0.6);
    
 }
+.product-info-container{
+    margin-top: 3rem;
+ }
+
+ .product-details-section{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 0.4rem;
+ }
+ .product-details-box{
+    background-color: #F5F5F5;
+    padding: 1.5rem 1rem;
+ }
+
+ @media (max-width:768px)  {
+    .product-details-section{
+        flex-direction: column;
+    }
+    .product-details-box content{
+        display: none;
+    }
+    .product-details-box .collapseContent{
+        display: block !important;
+    }
+ }
+
+ .ratings-review-container{
+    margin-top: 3rem;
+ }
+ .ratings-review-section{
+    display: flex;
+    flex-direction: row;
+    background-color: #F2F2F2;
+    padding: 2.5rem;
+    gap: 2rem;
+ }
+ .review-section-left{
+    width: 35%;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    color: #F8EA54;
+    align-items: center;
+    padding: 2rem 3rem;
+    >h3{
+        font-size: 60px;
+    }
+    >p{
+        font-size: 25px;
+        text-align: center;
+    }
+ }
+
+ .review-section-right{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    
+    
+ }
+ .review-section-right .rating-bar{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-right: 2rem;
+    margin-top: -1rem;
+ }
+ .review-section-right h4{
+    text-transform: uppercase;
+    border-bottom: 3px solid #F9EB28;
+    width: fit-content;
+ }
+ .review-section-right>p{
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+ }
+
+ .product-component .best-seller-container{
+    margin: 3rem 0 0 0;
+ }
+
+ .about-us-container ul{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0;
+    margin-top: 4rem;
+ }
+ .about-us-container ul img{
+    width: 35%;
+ }
+ .about-us-container ul li{
+    list-style: none;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #b8b4b4;
+    border-radius: 7px;
+    padding: 2rem 0;
+ }
+ @media (max-width:768px) {
+    
+    
+
+    .ratings-review-section{
+        padding: 0;
+    }
+ }

@@ -4,3 +4,10 @@
 .cash-on img{
     width: 1350px;
 }
+@media screen and (max-width:768px) {
+    .cash-on img{
+        width: 100%;
+        height: 100%;
+    }
+    
+}

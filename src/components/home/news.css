@@ -1,7 +1,13 @@
-.news-container{
-    width: 100%;
-    text-align: center;
+.news-container {
+  width: 100%;
+  text-align: center;
 }
-.news-container img{
-    width: 1170px;
+.news-container img {
+  width: 1170px;
+}
+@media screen and (max-width: 768px) {
+  .news-container img {
+    width: 100%;
+    height: 30px;
+  }
 }

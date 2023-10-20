@@ -1,0 +1,38 @@
+/* modal container */
+
+.auth-modal {
+  padding: 1rem;
+  margin: 0.25rem;
+  width: 7rem;
+  background-color: #ddd;
+  height: 7rem;
+  position: absolute;
+  top: 65px;
+  right: 110px;
+
+  border-radius: 0.25rem;
+  background-color: #fff;
+  border: none;
+}
+
+.signin-btn {
+    height: 10px;
+  border: none;
+  border-radius: 2rem;
+  color: #000;
+}
+
+.auth-modal-subdiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.auth-modal-subdiv h5{
+    font-size: 16px;
+    margin: 0;
+}
+.auth-modal-subdiv button{
+  background: none;
+  cursor: pointer;
+  border: none;
+}
