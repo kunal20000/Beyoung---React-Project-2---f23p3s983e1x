@@ -1,5 +1,4 @@
 .product-container {
-  margin-top: 50px;
   margin-left: 70px;
   margin-right: 100px;
 }
@@ -12,9 +11,32 @@
   font-weight: 600;
   color: #000;
   text-transform: uppercase;
-  margin: 0px 0px 20px 0px;
+  margin: 25px 0px 0px 0px;
 }
+.men-clothing-main {
+  margin-left: 312px;
+  margin-bottom: 0px;
+  width: 960px;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
 
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
 .men-clothing-main div p {
   color: #000;
   font-weight: 400;
@@ -25,27 +47,23 @@
 .productListContainer {
   display: flex;
   flex-wrap: wrap;
-  
 }
 
-.productCotainerStart{
+.productCotainerStart {
   display: flex;
   flex-direction: column;
 }
 .product-container-male {
-  width: 30%; 
+  width: 33%;
   padding: 10px;
- 
+
   text-align: center;
   position: relative;
-  box-sizing: border-box; 
-  
-  
+  box-sizing: border-box;
 }
 
 .product-container-male .for-man-image {
   display: flex;
- 
 }
 .heart-icon {
   margin-top: 10px;
@@ -64,8 +82,8 @@
   height: auto;
   border-radius: 5px;
 }
-.product-container-male .image-for-male:hover{
-    background-image: url("https://www.beyoung.in/api/cache/catalog/products/…_plain_t-shirt_combo_hover_16_08_2023_700x933.jpg");
+.product-container-male .image-for-male:hover {
+  background-image: url("https://www.beyoung.in/api/cache/catalog/products/…_plain_t-shirt_combo_hover_16_08_2023_700x933.jpg");
 }
 .product-container-male h6 {
   margin: 10px 0px 0px 0px;

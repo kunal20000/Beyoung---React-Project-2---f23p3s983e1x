@@ -3,7 +3,7 @@ import "./cart.css";
 import { useNavigate } from "react-router-dom";
 
 
-const Cart = () => {
+const EmptyCart = () => {
   
 
 
@@ -19,4 +19,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default EmptyCart;

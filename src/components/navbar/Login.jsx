@@ -10,6 +10,10 @@ import {
   getHeaderWithProjectIdAndBody,
   headerWithProjectIdOnly,
 } from "../utils/getHeader";
+import { useUpdateLoginStatus } from "../context/AuthContext";
+import { useUpdateCartNumbers, useUpdateWishlistNumbers } from "../context/CartNumberContext";
+import { getnumberOfCartItems } from "../utils/CartApi";
+import { getNumberOfWishlistItems } from "../utils/WishlistApi";
 const customStyles = {
   content: {
     top: "50%",
@@ -34,12 +38,16 @@ const Login = ({ isOpen, closeModal }) => {
   const [emailErr, setEmailErr] = useState(false);
   const [passwordErr, setPasswordErr] = useState(false);
 
+  const updateLoginStatus = useUpdateLoginStatus();
+  const updateCartNumber = useUpdateCartNumbers();
+  const updateWishlistNumbers = useUpdateWishlistNumbers();
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === "email" && !isValidEmail(value)) {
       setEmailErr("Please enter a valid email address.");
-      console.log(value);
     } else {
       setEmailErr(false);
     }
@@ -75,6 +83,11 @@ const Login = ({ isOpen, closeModal }) => {
         sessionStorage.setItem("loginStatus", true);
         sessionStorage.setItem("authToken", res.data.token);
         sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.name));
+        const numberOfCartItems = await getnumberOfCartItems();
+        const numberOfWishlistItems = await getNumberOfWishlistItems();
+        updateLoginStatus(true);
+        updateCartNumber(numberOfCartItems);
+        updateWishlistNumbers(numberOfWishlistItems);
         setLoader(true);
         closeModal(true);
         navigate("/");
@@ -91,22 +104,7 @@ const Login = ({ isOpen, closeModal }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValidEmail(userInfo.email) && userInfo.password.length >= 6) {
-      // If email and password are valid, attempt login
-      signIn(userInfo);
-    } else {
-      // Display error messages
-      setEmailErr(
-        isValidEmail(userInfo.email)
-          ? false
-          : "Please enter a valid email address."
-      );
-      setPasswordErr(
-        userInfo.password.length >= 6
-          ? false
-          : "Password must be at least 6 characters long."
-      );
-    }
+
     signIn(userInfo);
   };
   return (
@@ -153,7 +151,7 @@ const Login = ({ isOpen, closeModal }) => {
                     color: "red",
                     fontSize: "15px",
                     textAlign: "center",
-                   
+                    margin:"0px"
                   }}
                 >
                   {emailErr}
@@ -172,6 +170,7 @@ const Login = ({ isOpen, closeModal }) => {
                     color: "red",
                     fontSize: "17px",
                     textAlign: "center",
+                    margin:"0px"
                   }}
                 >
                   {passwordErr}

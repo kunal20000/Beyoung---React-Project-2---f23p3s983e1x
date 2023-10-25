@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
-import { Badge } from "@mui/material";
+import { Badge, ClickAwayListener, Popper, TextField } from "@mui/material";
 import { ReactComponent as LocationLogo } from "../asset/location.svg";
 import { ReactComponent as BeyoungLogo } from "../asset/beyoung.svg";
 import { ReactComponent as SearchLogo } from "../asset/searchbar.svg";
@@ -11,10 +11,21 @@ import ReactDOM from "react-dom";
 import { useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
 import Login from "./Login";
-
 import MyAccountModal from "./MyAccountModal";
 import { ToastContainer, toast } from "react-toastify";
+import { getProductsBySearch } from "../utils/getProductApi";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  useCartNumbers,
+  useUpdateCartNumbers,
+  useUpdateWishlistNumbers,
+  useWishlistNumbers,
+} from "../context/CartNumberContext";
+import {
+  useAuth,
+  useUpdateLoginStatus,
+  userUpdateLoginModalStatus,
+} from "../context/AuthContext";
 
 const customStyles = {
   content: {
@@ -28,14 +39,54 @@ const customStyles = {
     border: "none",
   },
 };
-const navbar = ({ products }) => {
+
+const Navbar = () => {
+  const loginStatus = useAuth();
+  const numberOfCartItems = useCartNumbers();
+  const updateLoginStatus = useUpdateLoginStatus();
+  const updateCartNumber = useUpdateCartNumbers();
+  const updateWishlistNumbers = useUpdateWishlistNumbers();
+  const numberOfWishlistItems = useWishlistNumbers();
+  const setShowLoginModal = userUpdateLoginModalStatus();
+
   const handleLogout = () => {
     sessionStorage.removeItem("userInfo");
     sessionStorage.removeItem("authToken");
-    toast.success("Logged Out Successfully");
+    sessionStorage.removeItem("userName");
+    sessionStorage.removeItem("useremail");
+    updateLoginStatus(false);
+    updateCartNumber(0);
+    updateWishlistNumbers(0);
+    // toast.success("Logged Out Successfully");
   };
-  const isLoggedIn = sessionStorage.getItem("userInfo");
 
+  const handleGoToCart = () => {
+    if (loginStatus) {
+      navigate("/cart");
+      console.log("login Status");
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const searchInputRef = useRef();
+
+  const handleSearchBtnClick = (event) => {
+    if (anchorEl) {
+      setIsSearchbarOpen(false);
+      setAnchorEl(null);
+    } else {
+      setIsSearchbarOpen(true);
+      setAnchorEl(event.currentTarget);
+    }
+  };
+  const handleSearch = async () => {
+    const { value } = searchInputRef.current;
+    setIsSearchbarOpen(false);
+    navigate(`/products?name=${value}`);
+  };
   const navigate = useNavigate(null);
 
   const [showModal, setShowModal] = useState(false);
@@ -65,6 +116,7 @@ const navbar = ({ products }) => {
   const closeMyAccountModal = () => {
     setModalHome(false);
   };
+
   return (
     <header>
       <div className="navbar">
@@ -84,32 +136,32 @@ const navbar = ({ products }) => {
               </a>
             </div>
             <div className="rightSlide">
-              {!isLoggedIn ? (
-                <Link
-                  id="loginBtn"
-                  onClick={openLoginModal}
-                  className="activeBtnLogin"
-                >
-                  Log In
-                </Link>
+              {!loginStatus ? (
+                <>
+                  <Link
+                    id="loginBtn"
+                    onClick={openLoginModal}
+                    className="activeBtnLogin"
+                  >
+                    Log In
+                  </Link>
+                  <Link id="registerBtn" onClick={openSignUp}>
+                    Signup
+                  </Link>
+                </>
               ) : (
-                <Link
-                  id="loginBtn"
-                  onClick={openMyAccountModal}
-                  className="activeBtnLogin"
-                >
-                  My Account
-                </Link>
-              )}
-
-              {!isLoggedIn ? (
-                <Link id="registerBtn" onClick={openSignUp}>
-                  Signup
-                </Link>
-              ) : (
-                <Link id="registerBtn" onClick={handleLogout}>
-                  Logout
-                </Link>
+                <>
+                  <Link
+                    id="loginBtn"
+                    onClick={openMyAccountModal}
+                    className="activeBtnLogin"
+                  >
+                    My Account
+                  </Link>
+                  <Link id="registerBtn" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </>
               )}
             </div>
           </div>
@@ -129,7 +181,7 @@ const navbar = ({ products }) => {
                   <li className="menu-top">
                     <NavLink
                       className="menu-title"
-                      to={`/productslist?gender=men`}
+                      to={`menproducts?gender=men`}
                     >
                       Men
                     </NavLink>
@@ -137,43 +189,74 @@ const navbar = ({ products }) => {
                   <li className="menu-top">
                     <NavLink
                       className="menu-title"
-                      to={`/productslistcomponent?gender=Woman`}
+                      to={`/womanproducts?gender=woman`}
                     >
                       Woman
                     </NavLink>
                   </li>
                   <li className="menu-top">
-                    <NavLink className="menu-title" to={`/products`}>
+                    <NavLink className="menu-title" to={`/combos`}>
                       COMBOS
                     </NavLink>
                   </li>
                   <li className="menu-top">
-                    <NavLink className="menu-title">JOGGERS</NavLink>
+                    <NavLink className="menu-title" to={`/goggers`}>
+                      JOGGERS
+                    </NavLink>
                   </li>
                   <li className="menu-top">
-                    <NavLink className="menu-title">SHOP THE LOOK</NavLink>
+                    <NavLink className="menu-title" to={`shopthelook?`}>
+                      SHOP THE LOOK
+                    </NavLink>
                   </li>
                   <li className="menu-top">
-                    <NavLink className="menu-title">SHOP BY COLLECTION</NavLink>
+                    <NavLink
+                      className="menu-title"
+                      to={`/shopbycollection?shopall`}
+                    >
+                      SHOP BY COLLECTION
+                    </NavLink>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="right">
-              <Link className="searchBar" href="#">
+              <Link className="searchBar" onClick={handleSearchBtnClick}>
                 <SearchLogo />
               </Link>
               <Link to="/wishlist" className="wishlist-icon">
-                <WishListLogo />
+                <Badge badgeContent={numberOfWishlistItems}>
+                  <WishListLogo />
+                </Badge>
               </Link>
-              <Link className="cart-icon" to={`/cart`}>
-                <Badge>
+              <Link className="cart-icon" onClick={handleGoToCart}>
+                <Badge badgeContent={numberOfCartItems}>
                   <CartLogo />
                 </Badge>
               </Link>
             </div>
           </div>
         </div>
+        {isSearchbarOpen && (
+          <ClickAwayListener onClickAway={handleSearchBtnClick}>
+            <Popper
+              open={isSearchbarOpen}
+              anchorEl={anchorEl}
+              placement="bottom-start"
+              style={{ width: '350px' }} 
+            >
+              <div className="search-bar">
+                <input
+                  id="searchBarInput"
+                  type="text"
+                  placeholder="Search entire store here..."
+                  ref={searchInputRef}
+                />
+                <button onClick={handleSearch}>Search</button>
+              </div>
+            </Popper>
+          </ClickAwayListener>
+        )}
         <ToastContainer />
       </div>
       <Login isOpen={showModal} closeModal={closeLoginModal} />
@@ -186,4 +269,4 @@ const navbar = ({ products }) => {
   );
 };
 
-export default navbar;
+export default Navbar;

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { Link } from "react-router-dom";
+import { getProductsBySearch } from "../utils/getProductApi";
 const BigSavingZone = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const images = [
@@ -24,25 +25,36 @@ const BigSavingZone = () => {
     );
   };
 
+  
+
   return (
     <div className="big-saving-zone">
       <p className="headaing-zone">big saving zone</p>
       <div className="saving-zone-2">
         <div onClick={prevImage}>
-          <ArrowBackIosIcon/>
+          <ArrowBackIosIcon />
         </div>
-       
+
         <div className="image-slider">
           {images
             .slice(imageIndex, imageIndex + imagesToShow)
             .map((image, i) => (
-              <img className="big-save-image" width="400px" style={{padding:"10px 10px"}} key={i} src={image} alt={`Image ${i}`} />
+              <Link to={`/shopthelook`}>
+                <img
+                  className="big-save-image"
+                  width="400px"
+                  style={{ padding: "10px 10px" }}
+                  key={i}
+                  src={image}
+                  alt={`Image ${i}`}
+                />
+              </Link>
             ))}
         </div>
-        
-       <div onClick={nextImage}>
-        <ArrowForwardIosIcon/>
-       </div>
+
+        <div onClick={nextImage}>
+          <ArrowForwardIosIcon />
+        </div>
       </div>
     </div>
   );

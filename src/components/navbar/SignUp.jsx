@@ -45,7 +45,7 @@ const SignUp = ({ isOpen, closeModal }) => {
       setNameErr(false);
     }
 
-    if ((name === "email", !isValidEmail(value))) {
+    if ((name === "email" && !isValidEmail(value))) {
       setEmailErr("Please enter a valid email address.");
     } else {
       setEmailErr(false);
@@ -76,7 +76,6 @@ const SignUp = ({ isOpen, closeModal }) => {
         setSuceessMessage("Account created succesffuly!");
         sessionStorage.setItem("authToken", res.data.token);
         sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.user));
-        navigate("/");
         closeModal(true);
         setLoader(true);
         toast.success("Please Login!");

@@ -67,7 +67,8 @@
   gap: 1rem;
 }
 .shirt-image img {
-  width: 100%;
+  height: 300px;
+  width: 560px;
 }
 @media screen and (max-width: 767px) {
  .shirt-image img{

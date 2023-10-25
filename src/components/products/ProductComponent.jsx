@@ -8,7 +8,6 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { Divider, LinearProgress, Rating } from "@mui/material";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-// import BestSeller from "../home/BestSeller";
 
 const ProductComponent = () => {
   const [product, setProduct] = useState([]);
