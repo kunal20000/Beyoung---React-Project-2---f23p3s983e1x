@@ -10,67 +10,57 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (modelRef.current.contains != event.target) {
-        closeModal();
+      if (modelRef.current && !modelRef.current.contains(event.target)) {
+         closeModal(true);
       }
     };
-    if (isOpenHomeModal) {
-      document.addEventListener("click", handleClickOutside);
-    }
+
+    
 
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  },[isOpenHomeModal,closeModal]);
+  }, []);
   return (
     <>
       {isOpenHomeModal && (
         <section className="auth-modal" ref={modelRef}>
           <div className="auth-modal-subdiv">
             <h5>Hello {userName}</h5>
+            <button onClick={closeModal}>X</button>
           </div>
           <div className="link-container">
             <Link
               className="link-direction"
-              onClick={() => {
-                navigate("/order");
-              }}
+              to={`/order`}
             >
               Order
             </Link>
 
             <Link
               className="link-direction"
-              onClick={() => {
-                navigate("/address");
-              }}
+              to={`/address`}
             >
               Address
             </Link>
 
             <Link
               className="link-direction"
-              onClick={() => {
-                navigate("/profile");
-              }}
+              to={`/myaccount/profile`}
             >
               Profile
             </Link>
 
             <Link
               className="link-direction"
-              onClick={() => {
-                navigate("/wishlist");
-              }}
+              to={`/wishlist`}
             >
               Wishlist
             </Link>
 
             <Link
               className="link-direction"
-              onClick={() => {
-                navigate("/coupons");
-              }}
+              to={`/coupons`}
             >
               Coupons
             </Link>

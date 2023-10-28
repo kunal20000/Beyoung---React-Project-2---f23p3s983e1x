@@ -17,7 +17,11 @@ import CartComponent from "./cart/CartComponent";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { LoaderProvider } from "./context/LoaderContext";
+import MyAccount from "./navbar/MyAccount";
 import ProtectedRoute from "./ProtectedRoute";
+import MyProfile from "./navbar/MyProfile";
+import MyOrder from "./navbar/MyOrder";
+import CheckoutComponent from "./checkout/CheckoutComponent";
 function App() {
   return (
     <AuthProvider>
@@ -39,11 +43,18 @@ function App() {
                   element={<ShopByCollection />}
                 />
                 <Route path="/shopthelook" element={<ShopTheLook />} />
+
                 <Route
                   path="/cart"
                   element={<ProtectedRoute component={<CartComponent />} />}
                 />
+
+                <Route path="/myaccount" element={<MyAccount />}>
+                  <Route path="profile" element={<MyProfile />} />
+                  <Route path="order" element={<MyOrder />} />
+                </Route>
                 <Route path="/wishlist" element={<WishList />} />
+                <Route path="/checkout" element={<CheckoutComponent/>}/>
               </Routes>
               <Footer />
             </div>

@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "./productComponent.css";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { getProductById } from "../utils/getProductApi";
 import StarIcon from "@mui/icons-material/Star";
 import { ReactComponent as CartLogo } from "../asset/cart.svg";
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { Divider, LinearProgress, Rating } from "@mui/material";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useAuth, userUpdateLoginModalStatus } from "../context/AuthContext";
+import {
+  useUpdateCartNumbers,
+  useUpdateWishlistNumbers,
+} from "../context/CartNumberContext";
+import { useLoader } from "../context/LoaderContext";
+import { addItemToCart } from "../utils/CartApi";
+import { toast } from "react-toastify";
+import { useCheckout } from "../context/CheckoutContext";
+import { useNavigate } from "react-router-dom";
 const ProductComponent = () => {
   const [product, setProduct] = useState([]);
-
+  const navigate = useNavigate(null);
   const { id } = useParams();
+  const loginStatus = useAuth();
+  const updateCartNumber = useUpdateCartNumbers();
+  const updateWishlistNumbers = useUpdateWishlistNumbers();
+  const setShowLoginModal = userUpdateLoginModalStatus();
+  const { updateLoaderStatus } = useLoader();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
   const fetchProduct = async () => {
     try {
       const res = await getProductById(id);
@@ -26,7 +43,45 @@ const ProductComponent = () => {
   useEffect(() => {
     fetchProduct();
   }, [id]);
+  const [selectedQty, setSelectedQty] = useState(1);
+  const handleQtyChange = (event) => {
+    const newQuantity = event.target.value;
+    setSelectedQty(newQuantity);
+  };
+  const handleAddToCart = async () => {
+    if (loginStatus) {
+      try {
+        setIsLoading(true);
+        const res = await addItemToCart(id, selectedQty);
+        if (res.status === "success") {
+          toast.success(res.message);
+          updateCartNumber(res.results);
+        } else if (res.status === "fail") {
+          toast.error(res.message);
+        } else {
+          toast.error("Something went wrong, please try again later.");
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setShowLoginModal(true);
+    }
+  };
 
+  const handleBuyNow = () => {
+    if (loginStatus) {
+      const checkproduct = [product];
+      updateProducts(checkproduct);
+      updateTotalItems(1);
+      updateTotalPrice(product.price * selectedQty);
+      navigate('/checkout')
+    }else{
+      setShowLoginModal(true);
+    }
+  };
   return (
     <div className="product-component-container">
       <div className="product-component-box">
@@ -74,8 +129,14 @@ const ProductComponent = () => {
             <option value="3">3</option>
           </select>
           <div className="btn-cart-buy">
-            <button className="btn-cart"> <CartLogo/>  add to cart</button>
-            <button className="btn-buy"> <ArrowCircleRightIcon/> buy now</button>
+            <button className="btn-cart" onClick={handleAddToCart}>
+              {" "}
+              <CartLogo /> add to cart
+            </button>
+            <button className="btn-buy" onClick={handleBuyNow}>
+              {" "}
+              <ArrowCircleRightIcon /> buy now
+            </button>
           </div>
         </div>
       </div>
@@ -126,26 +187,100 @@ const ProductComponent = () => {
           </div>
           <div className="review-section-right">
             <h4>Product reviews</h4>
-            <p><ThumbUpIcon/>91% of customers recommend this brand</p>
-            <Divider sx={{marginBottom:'2rem'}}/>
-            <div className="rating-bar"><span>5</span><StarBorderIcon/><LinearProgress style={{ width:'70%' }} color='inherit' variant="determinate" value={80} /><span>80+</span> </div>
-            <div className="rating-bar"><span>4</span><StarBorderIcon/><LinearProgress style={{  width:'70%' }} color='inherit' variant="determinate" value={10} /><span>10+</span> </div>
-            <div className="rating-bar"><span>3</span><StarBorderIcon/><LinearProgress style={{  width:'70%' }} color='inherit' variant="determinate" value={7} /> <span>7+</span></div>
-            <div className="rating-bar"><span>2</span><StarBorderIcon/><LinearProgress style={{  width:'70%' }} color='inherit' variant="determinate" value={3} /> <span>3+</span></div>
-            <div className="rating-bar"><span>1</span><StarBorderIcon/><LinearProgress style={{  width:'70%' }} color='inherit' variant="determinate" value={1} /> <span>1+</span></div>
-
-
+            <p>
+              <ThumbUpIcon />
+              91% of customers recommend this brand
+            </p>
+            <Divider sx={{ marginBottom: "2rem" }} />
+            <div className="rating-bar">
+              <span>5</span>
+              <StarBorderIcon />
+              <LinearProgress
+                style={{ width: "70%" }}
+                color="inherit"
+                variant="determinate"
+                value={80}
+              />
+              <span>80+</span>{" "}
+            </div>
+            <div className="rating-bar">
+              <span>4</span>
+              <StarBorderIcon />
+              <LinearProgress
+                style={{ width: "70%" }}
+                color="inherit"
+                variant="determinate"
+                value={10}
+              />
+              <span>10+</span>{" "}
+            </div>
+            <div className="rating-bar">
+              <span>3</span>
+              <StarBorderIcon />
+              <LinearProgress
+                style={{ width: "70%" }}
+                color="inherit"
+                variant="determinate"
+                value={7}
+              />{" "}
+              <span>7+</span>
+            </div>
+            <div className="rating-bar">
+              <span>2</span>
+              <StarBorderIcon />
+              <LinearProgress
+                style={{ width: "70%" }}
+                color="inherit"
+                variant="determinate"
+                value={3}
+              />{" "}
+              <span>3+</span>
+            </div>
+            <div className="rating-bar">
+              <span>1</span>
+              <StarBorderIcon />
+              <LinearProgress
+                style={{ width: "70%" }}
+                color="inherit"
+                variant="determinate"
+                value={1}
+              />{" "}
+              <span>1+</span>
+            </div>
           </div>
         </div>
       </div>
       {/* <BestSeller/> */}
       <div className="about-us-container">
         <ul>
-          <li><img src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon1.jpg" alt="1.5M+ Happy Beyoungsters" /><p>1.5M+ Happy Beyoungsters</p></li>
-          <li><img src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon2.jpg" alt="15 Days Easy Returns" /><p>15 Days Easy Returns</p></li>
-          <li><img src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon3.jpg" alt="Homegrown Brand" /><p>Homegrown Brand</p></li>
-          <li><img src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon4.jpg" alt="Packed with Safety" /><p>Packed with Safety</p></li>
-          
+          <li>
+            <img
+              src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon1.jpg"
+              alt="1.5M+ Happy Beyoungsters"
+            />
+            <p>1.5M+ Happy Beyoungsters</p>
+          </li>
+          <li>
+            <img
+              src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon2.jpg"
+              alt="15 Days Easy Returns"
+            />
+            <p>15 Days Easy Returns</p>
+          </li>
+          <li>
+            <img
+              src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon3.jpg"
+              alt="Homegrown Brand"
+            />
+            <p>Homegrown Brand</p>
+          </li>
+          <li>
+            <img
+              src="https://www.beyoung.in/desktop/images/product-details-2/product-discription-icon4.jpg"
+              alt="Packed with Safety"
+            />
+            <p>Packed with Safety</p>
+          </li>
         </ul>
       </div>
     </div>

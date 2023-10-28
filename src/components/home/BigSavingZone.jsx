@@ -39,7 +39,7 @@ const BigSavingZone = () => {
           {images
             .slice(imageIndex, imageIndex + imagesToShow)
             .map((image, i) => (
-              <Link to={`/shopthelook`}>
+              <Link key={i} to={`/shopthelook`}>
                 <img
                   className="big-save-image"
                   width="400px"

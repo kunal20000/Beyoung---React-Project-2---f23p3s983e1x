@@ -51,3 +51,20 @@ export const deleteItemFromCart = async (id) => {
     return error.response.data;
   }
 };
+
+export const updateCredentialsAPI = async(body)=>{
+  const headers = getAuthHeaderConfig();
+
+  try {
+    const res = await axios.patch(`${apiURL}api/v1/user/updateMyPassword`,body,headers)
+    
+    return res.data
+  } catch (error) {
+    
+    
+    return error.response.data
+    
+  }
+  
+
+}

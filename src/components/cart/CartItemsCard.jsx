@@ -1,5 +1,5 @@
 import { Divider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { deleteItemFromCart } from "../utils/CartApi";
 import {
@@ -11,14 +11,21 @@ import { toast } from "react-toastify";
 import { useCheckout } from "../context/CheckoutContext";
 import { useLoader } from "../context/LoaderContext";
 import { addToFavApi } from "../utils/WishlistApi";
-import './cart.css';
+import "./cart.css";
 const CartItemsCard = ({ product, removeProductFromState }) => {
+ 
+  console.log("product", product);
   const {
-    product: { _id, name, displayImage, price },
+    product: { _id,name, displayImage, price },
     quantity,
   } = product;
-
+ 
   const [updateTotalItems, updateTotalPrice] = useCheckout();
+
+  useEffect(()=>{
+    setQty(quantity)
+  },[quantity]);
+  
   const [qty, setQty] = useState(quantity);
   const updateCartNumbers = useUpdateCartNumbers();
   const updateWishlistNumbers = useWishlistNumbers();
@@ -48,7 +55,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
     }
   };
 
-  const moveToWishlist = async () => {
+  const moveToWishlist = async (id) => {
     const body = { productId: id };
     try {
       updateLoderStatus(true);

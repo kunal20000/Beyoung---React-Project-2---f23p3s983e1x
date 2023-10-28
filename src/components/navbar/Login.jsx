@@ -83,6 +83,7 @@ const Login = ({ isOpen, closeModal }) => {
         sessionStorage.setItem("loginStatus", true);
         sessionStorage.setItem("authToken", res.data.token);
         sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.name));
+        
         const numberOfCartItems = await getnumberOfCartItems();
         const numberOfWishlistItems = await getNumberOfWishlistItems();
         updateLoginStatus(true);
@@ -168,7 +169,7 @@ const Login = ({ isOpen, closeModal }) => {
                 <p
                   style={{
                     color: "red",
-                    fontSize: "17px",
+                    fontSize: "15px",
                     textAlign: "center",
                     margin:"0px"
                   }}

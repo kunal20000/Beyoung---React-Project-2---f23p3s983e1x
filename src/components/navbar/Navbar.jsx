@@ -63,7 +63,7 @@ const Navbar = () => {
   const handleGoToCart = () => {
     if (loginStatus) {
       navigate("/cart");
-      console.log("login Status");
+      console.log("login Status",loginStatus);
     } else {
       setShowModal(true);
     }
@@ -112,9 +112,10 @@ const Navbar = () => {
     setModalHome(true);
     console.log("true");
   };
-
-  const closeMyAccountModal = () => {
+  
+  const closeMyAccountModal = (e) => {
     setModalHome(false);
+   
   };
 
   return (
@@ -155,6 +156,7 @@ const Navbar = () => {
                     id="loginBtn"
                     onClick={openMyAccountModal}
                     className="activeBtnLogin"
+                   
                   >
                     My Account
                   </Link>
@@ -225,15 +227,15 @@ const Navbar = () => {
                 <SearchLogo />
               </Link>
               <Link to="/wishlist" className="wishlist-icon">
-                <Badge badgeContent={numberOfWishlistItems}>
+                <Badge badgeContent={numberOfWishlistItems} >
                   <WishListLogo />
                 </Badge>
               </Link>
-              <Link className="cart-icon" onClick={handleGoToCart}>
-                <Badge badgeContent={numberOfCartItems}>
+              <button className="cart-icon" onClick={handleGoToCart}>
+                <Badge badgeContent={numberOfCartItems} color="primary">
                   <CartLogo />
                 </Badge>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -243,7 +245,7 @@ const Navbar = () => {
               open={isSearchbarOpen}
               anchorEl={anchorEl}
               placement="bottom-start"
-              style={{ width: '350px' }} 
+              style={{ width: "350px" }}
             >
               <div className="search-bar">
                 <input

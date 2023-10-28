@@ -37,6 +37,7 @@ const CartComponent = () => {
           <CartItems />
         </div>
       )}
+     
     </div>
   );
 };
