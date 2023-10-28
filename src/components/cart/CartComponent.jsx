@@ -4,6 +4,7 @@ import EmptyCart from "./EmptyCart";
 import { useCheckout } from "../context/CheckoutContext";
 import { useLoader } from "../context/LoaderContext";
 import { getCartItems } from "../utils/CartApi";
+import TotalPriceBox from "../checkout/TotalPriceBox";
 
 const CartComponent = () => {
     
@@ -35,6 +36,8 @@ const CartComponent = () => {
       ) : (
         <div className="cart-container">
           <CartItems />
+          <TotalPriceBox/>
+          
         </div>
       )}
      

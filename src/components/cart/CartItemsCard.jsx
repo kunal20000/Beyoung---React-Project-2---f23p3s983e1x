@@ -15,12 +15,13 @@ import "./cart.css";
 const CartItemsCard = ({ product, removeProductFromState }) => {
  
   console.log("product", product);
+
   const {
-    product: { _id,name, displayImage, price },
+    product: { _id, name, displayImage, price },
     quantity,
   } = product;
  
-  const [updateTotalItems, updateTotalPrice] = useCheckout();
+  const {updateTotalItems, updateTotalPrice} = useCheckout();
 
   useEffect(()=>{
     setQty(quantity)
@@ -30,7 +31,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
   const updateCartNumbers = useUpdateCartNumbers();
   const updateWishlistNumbers = useWishlistNumbers();
 
-  const { updateLoderStatus } = useLoader();
+  const { updateLoaderStatus } = useLoader();
 
   const handleQtyChange = (event) => {
     const newQuantity = event.target.value;
@@ -39,7 +40,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
 
   const removeItemFromCart = async (_id) => {
     try {
-      updateLoderStatus(true);
+      updateLoaderStatus(true);
       const res = await deleteItemFromCart(_id);
       if (res.status === "success") {
         removeProductFromState(_id);
@@ -51,14 +52,14 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
     } catch (err) {
       console.log(err);
     } finally {
-      updateLoderStatus(false);
+      updateLoaderStatus(false);
     }
   };
 
   const moveToWishlist = async (id) => {
     const body = { productId: id };
     try {
-      updateLoderStatus(true);
+      updateLoaderStatus(true);
       removeItemFromCart(id);
       const res = await addToFavApi(body);
       if (res.status === "success") {
@@ -69,7 +70,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
       }
     } catch (err) {
     } finally {
-      updateLoderStatus(false);
+      updateLoaderStatus(false);
     }
   };
 

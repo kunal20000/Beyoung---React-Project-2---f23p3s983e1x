@@ -5,10 +5,11 @@ import EmptyCart from "../cart/EmptyCart";
 import AddressBox from "./AddressBox";
 import TotalPriceBox from "./TotalPriceBox";
 import { Outlet } from "react-router";
+
 const CheckoutComponent = () => {
   const { totalItems, checkoutAddress } = useCheckout();
-  console.log("totalItems", totalItems)
-  console.log("checkoutAddress", checkoutAddress)
+  console.log("totalItems", totalItems);
+  console.log("checkoutAddress", checkoutAddress);
   return (
     <div>
       {totalItems === 0 && Object.keys(checkoutAddress).length === 0 ? (
@@ -17,6 +18,7 @@ const CheckoutComponent = () => {
         <div className="checkout-Container">
           <Outlet />
           <TotalPriceBox />
+          
         </div>
       )}
     </div>

@@ -42,23 +42,26 @@
   width: 100%;
 }
 .cashback-swipper img {
+  margin-left: 100px;
   margin-top: 20px;
-  width: 100%;
+  width: 85%;
+ 
 }
+/*
 .moving-image {
-  animation: moveImage 5s linear infinite; /* Use the 'moveImage' animation with a 10-second duration, linear easing, and infinite loop */
+  animation: moveImage 5s linear infinite;  Use the 'moveImage' animation with a 10-second duration, linear easing, and infinite loop 
 }
 @keyframes moveImage {
   0% {
-    transform: translateX(-50%); /* Start the image off-screen to the left */
+    transform: translateX(-50%); Start the image off-screen to the left 
   }
   100% {
     transform: translateX(
       50%
-    ); /* Move the image fully off-screen to the right */
+    );  Move the image fully off-screen to the right 
   }
 }
-
+*/
 /* shirt image css */
 .shirt-image {
   margin-top: 50px;

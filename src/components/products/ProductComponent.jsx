@@ -43,9 +43,10 @@ const ProductComponent = () => {
   useEffect(() => {
     fetchProduct();
   }, [id]);
+
   const [selectedQty, setSelectedQty] = useState(1);
   const handleQtyChange = (event) => {
-    const newQuantity = event.target.value;
+    const newQuantity = parseInt(event.target.value);
     setSelectedQty(newQuantity);
   };
   const handleAddToCart = async () => {
@@ -73,12 +74,18 @@ const ProductComponent = () => {
 
   const handleBuyNow = () => {
     if (loginStatus) {
-      const checkproduct = [product];
+      const checkproduct = [
+        {
+          quantity: selectedQty,
+          product: { _id: id },
+        },
+      ];
+
       updateProducts(checkproduct);
       updateTotalItems(1);
       updateTotalPrice(product.price * selectedQty);
-      navigate('/checkout')
-    }else{
+      navigate("/cart");
+    } else {
       setShowLoginModal(true);
     }
   };
@@ -115,9 +122,9 @@ const ProductComponent = () => {
           </label>
           <select name="" id="">
             <option value="">Select</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1">L</option>
+            <option value="2">XL</option>
+            <option value="3">XXL</option>
           </select>
           <label htmlFor="">
             Quantity<sup>*</sup>
