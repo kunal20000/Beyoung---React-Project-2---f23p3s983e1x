@@ -1,3 +1,10 @@
+.payments-container h5{
+   font-size: 25px;
+}
+.address-container>h4{
+  font-size: larger;
+  margin: 0;
+}
 .pricing-section-container{
     width: 35%;
     position: sticky;

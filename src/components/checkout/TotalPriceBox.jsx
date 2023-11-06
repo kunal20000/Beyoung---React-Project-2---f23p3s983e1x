@@ -49,6 +49,7 @@ const TotalPriceBox = () => {
   const location = useLocation();
   const currentRoute = location.pathname.split("/");
   const currentPage = currentRoute[currentRoute.length - 1];
+  
   const handleCheckout = (e) => {
     e.preventDefault();
     if (currentPage === "cart") {

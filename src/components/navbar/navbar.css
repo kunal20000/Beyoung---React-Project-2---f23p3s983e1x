@@ -158,14 +158,14 @@ ul {
   border: none;
   list-style: none;
 }
-.right .cart-icon svg {
-  /* margin-top: -10px; */
-  width: 30px;
+/* .right .cart-icon svg {
+  margin-top: -10px;
+  
 }
 
 .right .wishlist-icon svg {
   margin-top: -10px;
-}
+} */
 @media screen and (max-width: 667px) {
   .navbar {
     width: 100%;

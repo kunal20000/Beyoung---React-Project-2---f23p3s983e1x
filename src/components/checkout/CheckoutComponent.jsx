@@ -15,7 +15,7 @@ const CheckoutComponent = () => {
       {totalItems === 0 && Object.keys(checkoutAddress).length === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="checkout-Container">
+        <div className="checkout-Container cart-container">
           <Outlet />
           <TotalPriceBox />
           

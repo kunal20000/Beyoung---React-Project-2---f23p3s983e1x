@@ -8,6 +8,7 @@ import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import { Divider, LinearProgress, Rating } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+
 import { useAuth, userUpdateLoginModalStatus } from "../context/AuthContext";
 import {
   useUpdateCartNumbers,
@@ -28,12 +29,14 @@ const ProductComponent = () => {
   const setShowLoginModal = userUpdateLoginModalStatus();
   const { updateLoaderStatus } = useLoader();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [selectedImage, setSelectedImage] = useState("");
   const { updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
+
   const fetchProduct = async () => {
     try {
       const res = await getProductById(id);
       setProduct(res);
+      setSelectedImage(res.displayImage); // Set default image
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -45,10 +48,12 @@ const ProductComponent = () => {
   }, [id]);
 
   const [selectedQty, setSelectedQty] = useState(1);
+
   const handleQtyChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     setSelectedQty(newQuantity);
   };
+
   const handleAddToCart = async () => {
     if (loginStatus) {
       try {
@@ -89,14 +94,29 @@ const ProductComponent = () => {
       setShowLoginModal(true);
     }
   };
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image)
+  };
   return (
     <div className="product-component-container">
       <div className="product-component-box">
         <div className="product-left">
-          {/* <div className="forImageShowing">
-            <img src={product.images} alt="" />
-          </div> */}
-          <img width="30%" src={product.displayImage} alt="" />
+          <div className="forImageShowing">
+            {product.images &&
+              product.images
+                .slice(0, 5)
+                .map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index}`}
+                    onClick={() => handleImageClick(image)}
+                  />
+                ))}
+          </div>
+
+          <img width="30%" src={selectedImage} alt="" />
         </div>
         <div className="product-right">
           <h5>{product.name}</h5>
@@ -112,9 +132,9 @@ const ProductComponent = () => {
             <StarIcon />
             <StarIcon />
             <StarIcon />
-            &nbsp; &nbsp;
+            &nbsp;
             <p>
-              {product.ratings} <span>(328 Ratings & Reviews)</span>
+              {(Math.random() * 5).toFixed(1)} ratings and {Math.floor(Math.random() * 10000) + 1000} reviews
             </p>
           </section>
           <label htmlFor="">

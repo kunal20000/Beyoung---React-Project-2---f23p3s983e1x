@@ -1,5 +1,5 @@
 .product-component-container{
-    max-width: 1050px;
+    max-width: 1150px;
     text-align: center;
     margin: 30px auto;
     padding: 0 15px;
@@ -10,9 +10,20 @@
    text-align: start;
    gap: 3rem;
 }
+.product-left {
+    display: flex;
+    gap: 0.3rem
+}
 .product-left img{
    height: 450px;
    width: 450px;
+}
+.forImageShowing img{
+    display: flex;
+    gap: 0.5rem;
+    width: 6.5rem;
+    height: 5.6rem;
+    cursor: pointer;
 }
 .product-right{
    width: 100%;

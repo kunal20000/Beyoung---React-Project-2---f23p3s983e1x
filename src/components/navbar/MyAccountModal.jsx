@@ -53,7 +53,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
 
             <Link
               className="link-direction"
-              to={`/wishlist`}
+              to={`wishlist`}
             >
               Wishlist
             </Link>

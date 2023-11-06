@@ -50,6 +50,10 @@
     padding: 2rem 0;
   }
 
+  .address-container{
+    display: flex;
+    flex-direction: row;
+  }
   /*CartItems  */
 .cart-items-container {
     width: 50%;

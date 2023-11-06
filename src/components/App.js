@@ -5,7 +5,6 @@ import Footer from "./Footer/Footer";
 import ProductsList from "./products/ProductsList";
 import ProductComponent from "./products/ProductComponent";
 import { Router, Routes, Route } from "react-router-dom";
-import WishList from "./whishlist/WishList";
 import MenProducts from "./products/MenProducts";
 import WomanProducts from "./products/WomanProducts";
 import Combos from "./products/Combos";
@@ -22,6 +21,10 @@ import ProtectedRoute from "./ProtectedRoute";
 import MyProfile from "./navbar/MyProfile";
 import MyOrder from "./navbar/MyOrder";
 import CheckoutComponent from "./checkout/CheckoutComponent";
+import Shipping from "./checkout/Shipping";
+import Payment from "./checkout/Payment";
+import { Navigate } from "react-router-dom";
+import WishlistComponent from "./whishlist/WishlistComponent";
 function App() {
   return (
     <AuthProvider>
@@ -52,9 +55,14 @@ function App() {
                 <Route path="/myaccount" element={<MyAccount />}>
                   <Route path="profile" element={<MyProfile />} />
                   <Route path="order" element={<MyOrder />} />
+                  <Route path="wishlist" element={<WishlistComponent />} />
                 </Route>
-                <Route path="/wishlist" element={<WishList />} />
-                <Route path="/checkout" element={<CheckoutComponent/>}/>
+               
+                <Route path="/checkout" element={<CheckoutComponent />}>
+                  <Route index element={<Navigate to="shipping" />} /> 
+                  <Route path="shipping" element={<Shipping />} />
+                  <Route path="payment" element={<Payment />} />
+                </Route>
               </Routes>
               <Footer />
             </div>
