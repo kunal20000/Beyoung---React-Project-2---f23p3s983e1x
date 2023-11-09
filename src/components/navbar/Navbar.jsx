@@ -59,7 +59,7 @@ const Navbar = () => {
     updateWishlistNumbers(0);
     toast.success("Logged Out Successfully");
   };
-
+  // for cart
   const handleGoToCart = () => {
     if (loginStatus) {
       navigate("/cart");
@@ -68,7 +68,13 @@ const Navbar = () => {
       setShowModal(true);
     }
   };
-
+  // for wishlist
+  const handleGoToWishlist = ()=>{
+    if(!loginStatus){
+      setShowModal(true)
+    }
+  }
+  
   const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const searchInputRef = useRef();
@@ -167,8 +173,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="header_container">
-        <div className="fixedHeader">
+      <div className="header_container fixed-header">
+        {/* <div className="fixedHeader"> */}
           <div className="container">
             <div className="left">
               <figure>
@@ -224,7 +230,7 @@ const Navbar = () => {
               <Link className="searchBar" onClick={handleSearchBtnClick}>
                 <SearchLogo />
               </Link>
-              <Link to={`myaccount/wishlist`} className="wishlist-icon">
+              <Link to={`myaccount/wishlist`} onClick={handleGoToWishlist} className="wishlist-icon">
                 <Badge badgeContent={numberOfWishlistItems} color="primary">
                   <div style={{ width: "24px", height: "24px" }}>
                     <WishListLogo />
@@ -240,7 +246,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-        </div>
+        {/* </div> */}
         {isSearchbarOpen && (
           <ClickAwayListener onClickAway={handleSearchBtnClick}>
             <Popper

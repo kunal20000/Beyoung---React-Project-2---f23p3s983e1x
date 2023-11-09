@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import React from "react";
 import { useLoader } from "./context/LoaderContext";
+import "./loader.css";
 
 const Loader = () => {
   const { showLoader } = useLoader();

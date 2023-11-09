@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useLoader } from "../context/LoaderContext";
 import {
   useUpdateCartNumbers,
@@ -9,10 +9,8 @@ import { removeItemFromWishlist } from "../utils/WishlistApi";
 import { toast } from "react-toastify";
 import { addItemToCart } from "../utils/CartApi";
 import { Link } from "react-router-dom";
-import './wishlist.css';
+import "./wishlist.css";
 const WishlistCard = ({ product, removeProductFormState }) => {
-
-  
   const itemid = product._id;
   const {
     products: { displayImage, _id, name, price },
@@ -26,7 +24,7 @@ const WishlistCard = ({ product, removeProductFormState }) => {
     try {
       updateLoaderStatus(true);
       const res = await removeItemFromWishlist(_id);
-      console.log("res", res);
+      console.log(res);
       if (res.status === "success") {
         toast.success(res.message);
         updatedNumbers(res.results);
@@ -34,17 +32,17 @@ const WishlistCard = ({ product, removeProductFormState }) => {
       } else if (res.status === "fail") {
         toast.error(res.message);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     } finally {
       updateLoaderStatus(false);
     }
   };
-
   const moveToCart = async () => {
     try {
       updateLoaderStatus(true);
       const res = await addItemToCart(_id, 1);
+
       if (res.status === "success") {
         toast.success(res.message);
         handleRemoveItem();
@@ -54,12 +52,13 @@ const WishlistCard = ({ product, removeProductFormState }) => {
       } else {
         toast.error("Something went wrong, please try again later.");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
     } finally {
       updateLoaderStatus(false);
     }
   };
+
+ 
   return (
     <div className="wishlist-card">
       <Stack>
@@ -85,7 +84,10 @@ const WishlistCard = ({ product, removeProductFormState }) => {
           &#8377; {price}
         </Typography>
         <button onClick={moveToCart} className="move-to-cart-btn">
-          <img src='https://www.beyoung.in/mobile/images/my-account/bag.png' alt="" />
+          <img
+            src="https://www.beyoung.in/mobile/images/my-account/bag.png"
+            alt=""
+          />
           Add To Cart
         </button>
       </Stack>

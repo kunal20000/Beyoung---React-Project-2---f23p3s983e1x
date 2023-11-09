@@ -7,13 +7,16 @@ import { useUpdateWishlistNumbers } from "../context/CartNumberContext";
 import { useLoader } from "../context/LoaderContext";
 import { addToFavAPI } from "../utils/WishlistApi";
 import { toast } from "react-toastify";
+
 const ProductsList = ({ products }) => {
+
+
   const { name, price, _id, displayImage, subCategory } = products;
   const loginStatus = useAuth();
   const setShowLoginModal = userUpdateLoginModalStatus();
   const updateWishlistNumbers = useUpdateWishlistNumbers();
-  const { updateLoaderStatus } = useLoader();
-
+  const { updateLoaderStatus} = useLoader();
+  const [loader, setLoader] = useState(false)
   const handleAddToFav = async (e, productId) => {
     e.preventDefault();
     const body = {
@@ -21,7 +24,9 @@ const ProductsList = ({ products }) => {
     };
     if (loginStatus) {
       try {
-        updateLoaderStatus(true);
+        setLoader(true);
+         updateLoaderStatus(true)
+         console.log(updateLoaderStatus);
         const res = await addToFavAPI(body);
         console.log(body);
         // console.log(res);
@@ -50,7 +55,7 @@ const ProductsList = ({ products }) => {
         </div>
 
         <div className="productListContainer">
-          {!products ? (
+          {!products || products.length === 0 ? (
             <p>
               <span class="loader"></span>
             </p>
@@ -93,5 +98,5 @@ const ProductsList = ({ products }) => {
     </div>
   );
 };
-//
+
 export default ProductsList;
