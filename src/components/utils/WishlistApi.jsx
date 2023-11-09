@@ -2,18 +2,18 @@ import axios from "axios";
 import { getAuthHeaderConfig } from "./getHeader";
 import { apiURL } from "./getProductApi";
 
-export const addToFavApi = async (body) => {
+export const addToFavAPI = async (body) => {
   const headers = getAuthHeaderConfig();
 
   try {
     const res = await axios.patch(
-      `${apiURL}api/v1/ecommerce/wishlist`,
+      `https://academics.newtonschool.co/api/v1/ecommerce/wishlist`,
       body,
       headers
     );
     return res.data;
-  } catch (err) {
-    return err.response.data;
+  } catch (error) {
+    return error.response.data;
   }
 };
 export const getWishlistItems = async () => {
@@ -32,5 +32,18 @@ export const getNumberOfWishlistItems = async () => {
     return res.results;
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const removeItemFromWishlist = async (id) => {
+  const headers = getAuthHeaderConfig();
+  try {
+    const res = await axios.delete(
+      `${apiURL}api/v1/ecommerce/wishlist/${id}`,
+      headers
+    );
+    return res.data;
+  } catch (err) {
+    return err.response.data;
   }
 };

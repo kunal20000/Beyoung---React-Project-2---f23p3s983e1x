@@ -41,7 +41,7 @@ const MenProducts = () => {
         </div>
       </div>
 
-      <ProductsList products={products} />
+      <ProductsList products={products}  />
     </div>
   );
 };

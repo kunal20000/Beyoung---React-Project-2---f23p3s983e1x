@@ -59,13 +59,7 @@ const Navbar = () => {
     updateWishlistNumbers(0);
     toast.success("Logged Out Successfully");
   };
-  const handleGoToWishlist = () => {
-    if (loginStatus) {
-      navigate("/wishlist");
-    } else {
-      setShowModal(true);
-    }
-  };
+
   const handleGoToCart = () => {
     if (loginStatus) {
       navigate("/cart");
@@ -230,11 +224,7 @@ const Navbar = () => {
               <Link className="searchBar" onClick={handleSearchBtnClick}>
                 <SearchLogo />
               </Link>
-              <Link
-                to="/wishlist"
-                className="wishlist-icon"
-                onClick={handleGoToWishlist}
-              >
+              <Link to={`myaccount/wishlist`} className="wishlist-icon">
                 <Badge badgeContent={numberOfWishlistItems} color="primary">
                   <div style={{ width: "24px", height: "24px" }}>
                     <WishListLogo />

@@ -1,5 +1,5 @@
 import React,{useRef, useState, useEffect} from "react";
-import './profile.css';
+import './myaccount.css';
 import { Outlet, useNavigate } from "react-router";
 import { Avatar, Stack, Typography, useMediaQuery } from "@mui/material";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";

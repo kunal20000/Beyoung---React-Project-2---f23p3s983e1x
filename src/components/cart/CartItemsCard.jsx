@@ -10,7 +10,7 @@ import {
 import { toast } from "react-toastify";
 import { useCheckout } from "../context/CheckoutContext";
 import { useLoader } from "../context/LoaderContext";
-import { addToFavApi } from "../utils/WishlistApi";
+import { addToFavAPI } from "../utils/WishlistApi";
 import "./cart.css";
 const CartItemsCard = ({ product, removeProductFromState }) => {
  
@@ -61,7 +61,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
     try {
       updateLoaderStatus(true);
       removeItemFromCart(id);
-      const res = await addToFavApi(body);
+      const res = await addToFavAPI(body);
       if (res.status === "success") {
         toast.success(res.message);
         updateWishlistNumbers(res.results);

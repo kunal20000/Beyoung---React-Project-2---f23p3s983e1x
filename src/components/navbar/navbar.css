@@ -122,10 +122,14 @@ ul {
 .menuBar li .menu-title:hover {
   background-color: yellow;
 }
-
+.right{
+  display: flex;
+  gap: 0.3rem;
+}
 .right .searchBar {
   display: inline-block;
   position: relative;
+  margin-top: 1.5px;
 }
 .search-bar {
   margin-top: 18px;
@@ -151,21 +155,14 @@ ul {
   }
 }
 .wishlist-icon {
-  margin: 0 20px;
+  margin-left: 18px;
 }
 .cart-icon{
   background: none;
   border: none;
   list-style: none;
 }
-/* .right .cart-icon svg {
-  margin-top: -10px;
-  
-}
 
-.right .wishlist-icon svg {
-  margin-top: -10px;
-} */
 @media screen and (max-width: 667px) {
   .navbar {
     width: 100%;

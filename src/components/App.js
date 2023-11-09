@@ -16,15 +16,16 @@ import CartComponent from "./cart/CartComponent";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { CheckoutProvider } from "./context/CheckoutContext";
 import { LoaderProvider } from "./context/LoaderContext";
-import MyAccount from "./navbar/MyAccount";
+import MyAccount from "./myaccount/MyAccount";
 import ProtectedRoute from "./ProtectedRoute";
-import MyProfile from "./navbar/MyProfile";
-import MyOrder from "./navbar/MyOrder";
+import MyProfile from "./myaccount/MyProfile";
+import MyOrder from "./myaccount/MyOrder";
 import CheckoutComponent from "./checkout/CheckoutComponent";
 import Shipping from "./checkout/Shipping";
 import Payment from "./checkout/Payment";
 import { Navigate } from "react-router-dom";
-import WishlistComponent from "./whishlist/WishlistComponent";
+import WishList from "./myaccount/WishList";
+import WishlistCard from "./myaccount/WishlistCard";
 function App() {
   return (
     <AuthProvider>
@@ -52,14 +53,20 @@ function App() {
                   element={<ProtectedRoute component={<CartComponent />} />}
                 />
 
-                <Route path="/myaccount" element={<MyAccount />}>
+                <Route
+                  path="/myaccount"
+                  element={<ProtectedRoute component={<MyAccount />} />}
+                >
                   <Route path="profile" element={<MyProfile />} />
                   <Route path="order" element={<MyOrder />} />
-                  <Route path="wishlist" element={<WishlistComponent />} />
+                  <Route path="wishlist" element={<WishList />} />
                 </Route>
-               
-                <Route path="/checkout" element={<CheckoutComponent />}>
-                  <Route index element={<Navigate to="shipping" />} /> 
+
+                <Route
+                  path="/checkout"
+                  element={<ProtectedRoute component={<CheckoutComponent />} />}
+                >
+                  <Route index element={<Navigate to="shipping" />} />
                   <Route path="shipping" element={<Shipping />} />
                   <Route path="payment" element={<Payment />} />
                 </Route>

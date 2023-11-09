@@ -2,8 +2,46 @@ import React, { useEffect, useState } from "react";
 import "./product.css";
 import { ReactComponent as LikeWhishlistIcon } from "../asset/likeWishlist.svg";
 import { Link, NavLink } from "react-router-dom";
-
+import { useAuth, userUpdateLoginModalStatus } from "../context/AuthContext";
+import { useUpdateWishlistNumbers } from "../context/CartNumberContext";
+import { useLoader } from "../context/LoaderContext";
+import { addToFavAPI } from "../utils/WishlistApi";
+import { toast } from "react-toastify";
 const ProductsList = ({ products }) => {
+  const { name, price, _id, displayImage, subCategory } = products;
+  const loginStatus = useAuth();
+  const setShowLoginModal = userUpdateLoginModalStatus();
+  const updateWishlistNumbers = useUpdateWishlistNumbers();
+  const { updateLoaderStatus } = useLoader();
+
+  const handleAddToFav = async (e, productId) => {
+    e.preventDefault();
+    const body = {
+      productId,
+    };
+    if (loginStatus) {
+      try {
+        updateLoaderStatus(true);
+        const res = await addToFavAPI(body);
+        console.log(body);
+        // console.log(res);
+        if (res.status === "success") {
+          toast.success(res.message);
+          updateWishlistNumbers(res.results);
+        } else if (res.status === "fail") {
+          toast.error(res.message);
+        } else {
+          toast.error("Something went wrong, please try again later.");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        updateLoaderStatus(false);
+      }
+    } else {
+      setShowLoginModal(true);
+    }
+  };
   return (
     <div className="product-container">
       <div className="men-clothing">
@@ -18,10 +56,10 @@ const ProductsList = ({ products }) => {
             </p>
           ) : (
             products.map((pro, id) => {
-              // my mapping logic here
+              //my mapping logic here
               const { name, price, _id, displayImage, subCategory } = pro;
               return (
-                <div className="product-container-male" key={id}>
+                <div className="product-container-male">
                   <Link
                     className="productCotainerStart"
                     to={`/products/${_id}`}
@@ -32,15 +70,17 @@ const ProductsList = ({ products }) => {
                         src={displayImage}
                         alt=""
                       />
-                      <div className="heart-icon">
+                      <div
+                        className="heart-icon"
+                        onClick={(e) => handleAddToFav(e, _id)}
+                      >
                         <LikeWhishlistIcon />
                       </div>
                     </a>
 
-                    <h6>{pro.name}</h6>
+                    <h6>{name}</h6>
                     <div className="for-price-off">
-                      <p className="inline-elements">₹{pro.price}</p> &nbsp;
-                      &nbsp;
+                      <p className="inline-elements">₹{price}</p> &nbsp; &nbsp;
                       <span className="inline-elements">(50%off)</span>
                     </div>
                   </Link>

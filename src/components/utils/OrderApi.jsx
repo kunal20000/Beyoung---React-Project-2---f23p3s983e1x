@@ -22,3 +22,26 @@ export const newOrder = async (id, qty, address) => {
     return err.response.data;
   }
 };
+
+export const getOrderHistory = async () => {
+  const headers = getAuthHeaderConfig();
+  try {
+    const res = await axios.get(`${apiURL}api/v1/ecommerce/order/`, headers);
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getSingleOrderDetails = async (id) => {
+  const headers = getAuthHeaderConfig();
+  try {
+    const res = await axios.get(
+      `${apiURL}api/v1/ecommerce/order/${id}`,
+      headers
+    );
+    return res.data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
