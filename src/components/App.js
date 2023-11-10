@@ -26,6 +26,7 @@ import Payment from "./checkout/Payment";
 import { Navigate } from "react-router-dom";
 import WishList from "./myaccount/WishList";
 import WishlistCard from "./myaccount/WishlistCard";
+import Loader from "./Loader";
 function App() {
   return (
     <AuthProvider>
@@ -71,6 +72,7 @@ function App() {
                   <Route path="payment" element={<Payment />} />
                 </Route>
               </Routes>
+              <Loader/>
               <Footer />
             </div>
           </LoaderProvider>

@@ -5,7 +5,7 @@ import "./loader.css";
 
 const Loader = () => {
   const { showLoader } = useLoader();
-
+   console.log("showLoader", showLoader)
   return (
     <div>
       <Backdrop

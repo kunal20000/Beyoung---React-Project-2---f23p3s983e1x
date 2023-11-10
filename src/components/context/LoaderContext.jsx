@@ -8,8 +8,8 @@ export function LoaderProvider({ children }) {
 
   const updateLoaderStatus = (newStatus) => {
     setShowLoader(newStatus);
-  };
-
+  }
+   console.log("updateLoaderStatus", updateLoaderStatus)
   return (
     <LoaderContext.Provider value={{ showLoader, updateLoaderStatus }}>
       {children}

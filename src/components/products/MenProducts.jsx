@@ -4,14 +4,15 @@ import axios from "axios";
 import { apiURL } from "../utils/getProductApi";
 import { getHeaderWithProjectIdAndBody } from "../utils/getHeader";
 import "./product.css";
+import { useLoader } from "../context/LoaderContext";
 const MenProducts = () => {
-  const [IsLoading, setIsLoading] = useState(false);
-
+  
+  
   const [products, setProducts] = useState([]);
-
+  const {updateLoaderStatus} = useLoader()
   const fetchProduct = async () => {
     try {
-      setIsLoading(true);
+      updateLoaderStatus(true)
       const res = await axios.get(
         `${apiURL}api/v1/ecommerce/clothes/products`,
         getHeaderWithProjectIdAndBody()
@@ -20,7 +21,9 @@ const MenProducts = () => {
       console.log(res);
     } catch (error) {
       console.log("error", error);
-      setIsLoading(false);
+      
+    }finally{
+      updateLoaderStatus(false)
     }
   };
   useEffect(() => {

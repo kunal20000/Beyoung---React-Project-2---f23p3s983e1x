@@ -3,20 +3,23 @@ import { getProductsBySearch } from "../utils/getProductApi";
 import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import ProductsList from "./ProductsList";
-
+import { useLoader } from "../context/LoaderContext";
 const Combos = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(2);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
-
+  const {updateLoaderStatus} = useLoader()
   const fetchProduct = async () => {
     try {
+      updateLoaderStatus(true)
       const res = await getProductsBySearch(page, { subCategory: "Shirt" });
 
       setProducts(res);
     } catch (error) {
       console.log(error);
+    }finally{
+      updateLoaderStatus(false)
     }
   };
 

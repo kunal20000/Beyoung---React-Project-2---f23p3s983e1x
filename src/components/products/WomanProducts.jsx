@@ -9,20 +9,23 @@ import {
   headerWithProjectIdOnly,
 } from "../utils/getHeader";
 import ProductsList from "./ProductsList";
-
+import { useLoader } from "../context/LoaderContext";
 const WomanProducts = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
-
+  const {updateLoaderStatus} = useLoader()
   const fetchProduct = async () => {
     try {
+      updateLoaderStatus(true)
       const res = await getProductsBySearch(page, { gender: "Women" });
 
       setProducts(res);
     } catch (error) {
       console.log(error);
+    }finally{
+      updateLoaderStatus(false)
     }
   };
 

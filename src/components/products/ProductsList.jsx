@@ -9,14 +9,12 @@ import { addToFavAPI } from "../utils/WishlistApi";
 import { toast } from "react-toastify";
 
 const ProductsList = ({ products }) => {
-
-
   const { name, price, _id, displayImage, subCategory } = products;
   const loginStatus = useAuth();
   const setShowLoginModal = userUpdateLoginModalStatus();
   const updateWishlistNumbers = useUpdateWishlistNumbers();
-  const { updateLoaderStatus} = useLoader();
-  const [loader, setLoader] = useState(false)
+  const { updateLoaderStatus } = useLoader();
+
   const handleAddToFav = async (e, productId) => {
     e.preventDefault();
     const body = {
@@ -24,9 +22,8 @@ const ProductsList = ({ products }) => {
     };
     if (loginStatus) {
       try {
-        setLoader(true);
-         updateLoaderStatus(true)
-         console.log(updateLoaderStatus);
+        updateLoaderStatus(true);
+        console.log(updateLoaderStatus);
         const res = await addToFavAPI(body);
         console.log(body);
         // console.log(res);
@@ -55,16 +52,12 @@ const ProductsList = ({ products }) => {
         </div>
 
         <div className="productListContainer">
-          {!products || products.length === 0 ? (
-            <p>
-              <span class="loader"></span>
-            </p>
-          ) : (
-            products.map((pro, id) => {
+          {
+          products.map((pro, id) => {
               //my mapping logic here
               const { name, price, _id, displayImage, subCategory } = pro;
               return (
-                <div className="product-container-male">
+                <div className="product-container-male" key={id}>
                   <Link
                     className="productCotainerStart"
                     to={`/products/${_id}`}
@@ -92,7 +85,8 @@ const ProductsList = ({ products }) => {
                 </div>
               );
             })
-          )}
+         
+          }
         </div>
       </div>
     </div>
