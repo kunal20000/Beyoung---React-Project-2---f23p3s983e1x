@@ -32,7 +32,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
           <div className="link-container">
             <Link
               className="link-direction"
-              to={`/order`}
+              to={`myaccount/order`}
             >
               Order
             </Link>
@@ -53,14 +53,14 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
 
             <Link
               className="link-direction"
-              to={`wishlist`}
+              to={`myaccount/wishlist`}
             >
               Wishlist
             </Link>
 
             <Link
               className="link-direction"
-              to={`/coupons`}
+              to={`myaccount/coupons`}
             >
               Coupons
             </Link>

@@ -20,7 +20,7 @@ const WomanProducts = () => {
     try {
       updateLoaderStatus(true)
       const res = await getProductsBySearch(page, { gender: "Women" });
-
+      console.log("resWoman", res)
       setProducts(res);
     } catch (error) {
       console.log(error);

@@ -1,0 +1,42 @@
+.order-details-container p,
+  .order-details-container h6 {
+    margin: 0;
+    padding: 0;
+  }
+  .order-details-status,
+  .order-details-amount {
+    display: flex;
+    justify-content: space-between;
+  }
+  .order-details-status {
+    display: flex;
+    align-items: center;
+    > button {
+      padding: 0.6rem 3rem;
+  
+      background-color: #d5d5d5;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      cursor: pointer;
+  
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .order-details-shipping {
+    > p {
+      font-weight: 550;
+    }
+    > h6 {
+      margin-bottom: 0.6rem;
+    }
+  }
+  
+  .order-details-payment p {
+    display: flex;
+    align-items: center;
+    margin-top: 0.6rem;
+    gap: 1rem;
+  }

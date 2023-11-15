@@ -6,8 +6,7 @@ import {
   getHeaderWithProjectIdAndBody,
   headerWithProjectIdOnly,
 } from "../utils/getHeader";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -189,7 +188,7 @@ const SignUp = ({ isOpen, closeModal }) => {
           </form>
         </div>
       </Modal>
-      <ToastContainer />
+    
     </div>
   );
 };

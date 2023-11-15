@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./login.css";
 import Modal from "react-modal";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { apiURL } from "../utils/getProductApi";
 import { useNavigate } from "react-router-dom";
 import {
@@ -186,7 +185,7 @@ const Login = ({ isOpen, closeModal }) => {
           </form>
         </div>
       </Modal>
-      <ToastContainer />
+     
     </div>
   );
 };

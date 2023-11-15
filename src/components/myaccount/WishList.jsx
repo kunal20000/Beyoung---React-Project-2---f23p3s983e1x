@@ -15,6 +15,8 @@ const WishList = () => {
     setProducts(updatedProducts);
     console.log(updatedProducts);
   };
+
+  
   const fetchProducts = async () => {
     try {
       updateLoaderStatus(true);

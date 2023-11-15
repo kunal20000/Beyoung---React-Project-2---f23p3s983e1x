@@ -27,6 +27,9 @@ import { Navigate } from "react-router-dom";
 import WishList from "./myaccount/WishList";
 import WishlistCard from "./myaccount/WishlistCard";
 import Loader from "./Loader";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import SingleOrder from "./myaccount/SingleOrder";
 function App() {
   return (
     <AuthProvider>
@@ -60,6 +63,7 @@ function App() {
                 >
                   <Route path="profile" element={<MyProfile />} />
                   <Route path="order" element={<MyOrder />} />
+                  <Route path="order/:id" element={<SingleOrder/>}/>
                   <Route path="wishlist" element={<WishList />} />
                 </Route>
 
@@ -74,6 +78,7 @@ function App() {
               </Routes>
               <Loader/>
               <Footer />
+              <ToastContainer/>
             </div>
           </LoaderProvider>
         </CheckoutProvider>

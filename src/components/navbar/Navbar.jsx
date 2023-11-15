@@ -26,6 +26,7 @@ import {
   useUpdateLoginStatus,
   userUpdateLoginModalStatus,
 } from "../context/AuthContext";
+import { useSearchParams } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -48,7 +49,7 @@ const Navbar = () => {
   const updateWishlistNumbers = useUpdateWishlistNumbers();
   const numberOfWishlistItems = useWishlistNumbers();
   const setShowLoginModal = userUpdateLoginModalStatus();
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleLogout = () => {
     sessionStorage.removeItem("userInfo");
     sessionStorage.removeItem("authToken");
@@ -59,6 +60,7 @@ const Navbar = () => {
     updateWishlistNumbers(0);
     toast.success("Logged Out Successfully");
   };
+
   // for cart
   const handleGoToCart = () => {
     if (loginStatus) {
@@ -68,6 +70,7 @@ const Navbar = () => {
       setShowModal(true);
     }
   };
+  
   // for wishlist
   const handleGoToWishlist = ()=>{
     if(!loginStatus){
@@ -90,6 +93,7 @@ const Navbar = () => {
   };
   const handleSearch = async () => {
     const { value } = searchInputRef.current;
+    console.log(value)
     setIsSearchbarOpen(false);
     navigate(`/products?name=${value}`);
   };
