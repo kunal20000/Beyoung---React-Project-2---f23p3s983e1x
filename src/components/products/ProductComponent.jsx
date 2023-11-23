@@ -5,10 +5,16 @@ import { getProductById } from "../utils/getProductApi";
 import StarIcon from "@mui/icons-material/Star";
 import { ReactComponent as CartLogo } from "../asset/cart.svg";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { Divider, LinearProgress, Rating } from "@mui/material";
+import {
+  Divider,
+  FormControlLabel,
+  LinearProgress,
+  RadioGroup,
+  Rating,
+  Radio,
+} from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-
 import { useAuth, userUpdateLoginModalStatus } from "../context/AuthContext";
 import {
   useUpdateCartNumbers,
@@ -19,6 +25,7 @@ import { addItemToCart } from "../utils/CartApi";
 import { toast } from "react-toastify";
 import { useCheckout } from "../context/CheckoutContext";
 import { useNavigate } from "react-router-dom";
+
 const ProductComponent = () => {
   const [product, setProduct] = useState([]);
   const navigate = useNavigate(null);
@@ -31,7 +38,7 @@ const ProductComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const { updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
-
+  const [selectedSize, setSelectedSize] = useState(false);
   const fetchProduct = async () => {
     try {
       const res = await getProductById(id);
@@ -94,9 +101,9 @@ const ProductComponent = () => {
       setShowLoginModal(true);
     }
   };
-
+  const sizes = ["S", "M", "L", "XL"];
   const handleImageClick = (image) => {
-    setSelectedImage(image)
+    setSelectedImage(image);
   };
   return (
     <div className="product-component-container">
@@ -134,26 +141,48 @@ const ProductComponent = () => {
             <StarIcon />
             &nbsp;
             <p>
-              {(Math.random() * 5).toFixed(1)} ratings and {Math.floor(Math.random() * 10000) + 1000} reviews
+              {(Math.random() * 5).toFixed(1)} ratings and{" "}
+              {Math.floor(Math.random() * 10000) + 1000} reviews
             </p>
           </section>
-          <label htmlFor="">
+          <label className="for-size">
             Size Chart<sup>*</sup>
           </label>
-          <select name="" id="">
-            <option value="">Select</option>
-            <option value="1">L</option>
-            <option value="2">XL</option>
-            <option value="3">XXL</option>
-          </select>
-          <label htmlFor="">
+          <RadioGroup
+            row
+            name="size"
+            sx={{ marginLeft: "8px" }}
+            value={selectedSize}
+            className="for-radio"
+            onChange={(e) => setSelectedSize(e.target.value)}
+          >
+            {sizes.map((size) => (
+              <FormControlLabel
+                className={`size-label ${
+                  selectedSize === size ? "active-size" : ""
+                }`}
+                key={size}
+                value={size}
+                control={<Radio sx={{ display: "none" }} color="default" />}
+                label={size}
+              />
+            ))}
+          </RadioGroup>
+
+          <label className="for-size">
             Quantity<sup>*</sup>
           </label>
-          <select name="" id="">
-            <option value="">Select</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <select
+            name="quantity"
+            id="quantity"
+            value={selectedQty}
+            onChange={handleQtyChange}
+          >
+            {Array.from({ length: 10 }, (_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
           </select>
           <div className="btn-cart-buy">
             <button className="btn-cart" onClick={handleAddToCart}>
@@ -173,12 +202,10 @@ const ProductComponent = () => {
           <div className="product-details-box">
             <h5>Product Highlights</h5>
             <content>
-              Fabric Stretch Denim Weave Type Twill Fade Light Blue Fit Slim
-              Tapered Fit Pocket 5 Pockets Waist Rise Mid-Rise Wash Indigo Wash
-              Style Everyday Casuals
+              {product.description}
             </content>
           </div>
-          <div className="product-details-box">
+          {/* <div className="product-details-box">
             <h5>Product Highlights</h5>
             <content>
               Fabric Stretch Denim Weave Type Twill Fade Light Blue Fit Slim
@@ -201,7 +228,7 @@ const ProductComponent = () => {
               Tapered Fit Pocket 5 Pockets Waist Rise Mid-Rise Wash Indigo Wash
               Style Everyday Casuals
             </content>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="ratings-review-container">

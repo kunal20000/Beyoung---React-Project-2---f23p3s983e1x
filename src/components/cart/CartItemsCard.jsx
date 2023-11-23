@@ -13,20 +13,16 @@ import { useLoader } from "../context/LoaderContext";
 import { addToFavAPI } from "../utils/WishlistApi";
 import "./cart.css";
 const CartItemsCard = ({ product, removeProductFromState }) => {
- 
   console.log("product", product);
 
   const {
     product: { _id, name, displayImage, price },
     quantity,
   } = product;
- 
-  const {updateTotalItems, updateTotalPrice} = useCheckout();
 
-  useEffect(()=>{
-    setQty(quantity)
-  },[quantity]);
-  
+  console.log("quantity", quantity);
+  const { updateTotalItems, updateTotalPrice } = useCheckout();
+
   const [qty, setQty] = useState(quantity);
   const updateCartNumbers = useUpdateCartNumbers();
   const updateWishlistNumbers = useWishlistNumbers();
@@ -34,8 +30,8 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
   const { updateLoaderStatus } = useLoader();
 
   const handleQtyChange = (event) => {
-    const newQuantity = event.target.value;
-    setQty(newQuantity);
+    const {value} = event.target;
+    setQty(value);
   };
 
   const removeItemFromCart = async (_id) => {
@@ -73,7 +69,9 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
       updateLoaderStatus(false);
     }
   };
-
+  useEffect(() => {
+    setQty(quantity);
+  }, [quantity]);
   return (
     <div className="cart-item-card">
       <section className="cart-item-content">
@@ -101,6 +99,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
                   {index + 1}
                 </option>
               ))}
+             {parseInt(qty)>10&&<><option value={qty}>{qty}</option></>}
             </select>
           </div>
         </div>

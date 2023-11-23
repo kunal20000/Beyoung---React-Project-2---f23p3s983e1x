@@ -20,3 +20,18 @@ p.heading-woman{
     padding: 5px 5px;
     
 }
+@media screen and (max-width:768px) {
+    .woman-container{
+        margin-left: 20px;
+    }
+    p.heading-woman{
+        font-size: 15px;
+        margin: 20px 0px 10px 0px;
+    }
+    .for-shirts-pants-woman img{
+        width: 45px;
+        
+    }
+
+    
+}

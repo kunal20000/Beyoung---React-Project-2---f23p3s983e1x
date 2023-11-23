@@ -3,20 +3,20 @@ import ProductsList from "./ProductsList";
 import { useSearchParams } from "react-router-dom";
 import { getProductsBySearch } from "../utils/getProductApi";
 import { useLoader } from "../context/LoaderContext";
-
+import "./product.css";
 
 const ShopByCollection = () => {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(3);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
   const { updateLoaderStatus} = useLoader();
   const fetchProduct = async () => {
     try {
       updateLoaderStatus(true)
-      const res = await getProductsBySearch(page, { sellerTag: "Trending" });
+      const res = await getProductsBySearch({ sellerTag: "Trending" });
 
-      setProducts(res);
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     }finally{

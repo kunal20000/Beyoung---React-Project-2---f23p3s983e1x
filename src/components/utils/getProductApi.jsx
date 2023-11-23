@@ -6,7 +6,7 @@ import {
 
 export const apiURL = "https://academics.newtonschool.co/";
 
-export const getProductsBySearch = async (page, filter) => {
+export const getProductsBySearch = async (filter) => {
   const headers = headerWithProjectIdOnly();
 
   function isObjectEmpty(obj) {
@@ -19,15 +19,13 @@ export const getProductsBySearch = async (page, filter) => {
   }
 
   try {
-    console.log(
-      `${apiURL}api/v1/ecommerce/clothes/products?limit=${20}&page=${page}${searchFilter}`
-    );
+    
     const res = await axios.get(
-      `${apiURL}api/v1/ecommerce/clothes/products?limit=${20}&page=${page}${searchFilter}`,
+      `${apiURL}api/v1/ecommerce/clothes/products?limit=${100}${searchFilter}`,
       headers
     );
 
-    return res.data.data;
+    return res.data;
   } catch (error) {
     return error;
   }

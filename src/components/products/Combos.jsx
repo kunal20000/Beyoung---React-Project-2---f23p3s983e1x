@@ -4,18 +4,23 @@ import { useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import ProductsList from "./ProductsList";
 import { useLoader } from "../context/LoaderContext";
+import axios from "axios";
+import { apiURL } from "../utils/getProductApi";
+import { headerWithProjectIdOnly } from "../utils/getHeader";
+import "./product.css";
 const Combos = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(2);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
   const {updateLoaderStatus} = useLoader()
-  const fetchProduct = async () => {
+
+  const fetchProduct = async (filter) => {
     try {
       updateLoaderStatus(true)
-      const res = await getProductsBySearch(page, { subCategory: "Shirt" });
-
-      setProducts(res);
+      const res = await getProductsBySearch({subCategory: "Shirt"})
+       
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     }finally{
@@ -32,7 +37,7 @@ const Combos = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    fetchProduct();
+    fetchProduct(filter);
   }, [filter, page]);
 
   return (

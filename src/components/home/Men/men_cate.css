@@ -20,3 +20,17 @@ p.heading-men{
     padding: 5px 5px;
     
 }
+@media screen and (max-width:768px) {
+    .men-container{
+        margin-left: 20px;
+    }
+    p.heading-men{
+        font-size: 15px;
+        margin: 20px 0px 10px 0px;
+    }
+   .for-shirts-pants img{
+   
+    width: 45px;
+   }
+    
+}

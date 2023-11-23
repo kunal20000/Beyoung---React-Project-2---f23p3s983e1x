@@ -40,7 +40,8 @@ const WishList = () => {
       {products.length === 0 ? (
         <>
           <img
-            style={{ width: "70%", margin: "0 auto" }}
+            style={{ width: "70%", margin: "0 10%" }}
+            className="empty-wishlist"
             src="https://beyoung-project.vercel.app/static/media/EMPTY-WISHLIST-PAGE.f387771e0f3a4c41214b.jpg"
             alt="empty-wishlist"
           />

@@ -33,7 +33,7 @@ const MyOrder = () => {
     <div className="my-order-container">
       {orders.length === 0 ? (
         <img
-          style={{ width: "70%", margin: "0 auto" }}
+          style={{ width: "70%", margin: "0 10%" }}
           src="https://beyoung-project.vercel.app/static/media/no-orders.3d41c9015fecbdab3ebd.gif"
           alt="no-orders"
         />

@@ -3,6 +3,7 @@ import ProductsList from "./ProductsList";
 import { useSearchParams } from "react-router-dom";
 import { getProductsBySearch } from "../utils/getProductApi";
 import { useLoader } from "../context/LoaderContext";
+import "./product.css";
 const Goggers = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(2);
@@ -12,8 +13,8 @@ const Goggers = () => {
   const fetchProduct = async () => {
     try {
       updateLoaderStatus(true);
-      const res = await getProductsBySearch(page, { sellerTag: "Top Rated" });
-      setProducts(res);
+      const res = await getProductsBySearch({ sellerTag: "Top Rated" });
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     } finally {

@@ -12,8 +12,9 @@
         margin: 0;
     }  
   .hand-shake-container img {
-    width: 100%;
-    margin: 0;
+    width: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
     padding: 0;
   }
 }

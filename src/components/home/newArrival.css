@@ -17,10 +17,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+   
   }
-  .saving-zone-2 button{
-    width: 50px;
-    height: 80px;
-    border: none;
   
+  
+  @media screen and (max-width: 768px) {
+    .image-slider img{
+      width: 60px;
+    }
+    .big-saving-zone .saving-zone1{
+      font-size: 15px;
+      margin: 0px 20px 10px 35px;
+    }
+
   }

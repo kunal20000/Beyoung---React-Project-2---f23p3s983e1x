@@ -50,6 +50,7 @@ const Navbar = () => {
   const numberOfWishlistItems = useWishlistNumbers();
   const setShowLoginModal = userUpdateLoginModalStatus();
   const [searchParams, setSearchParams] = useSearchParams();
+
   const handleLogout = () => {
     sessionStorage.removeItem("userInfo");
     sessionStorage.removeItem("authToken");
@@ -77,7 +78,8 @@ const Navbar = () => {
       setShowModal(true)
     }
   }
-  
+
+  // for search bar
   const [isSearchbarOpen, setIsSearchbarOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const searchInputRef = useRef();
@@ -93,10 +95,10 @@ const Navbar = () => {
   };
   const handleSearch = async () => {
     const { value } = searchInputRef.current;
-    console.log(value)
     setIsSearchbarOpen(false);
     navigate(`/products?name=${value}`);
   };
+  
   const navigate = useNavigate(null);
 
   const [showModal, setShowModal] = useState(false);

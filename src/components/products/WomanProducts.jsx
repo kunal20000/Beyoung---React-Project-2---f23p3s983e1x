@@ -4,6 +4,7 @@ import { getProductsBySearch } from "../utils/getProductApi";
 import ProductComponent from "./ProductComponent";
 import Products from "./ProductsList";
 import axios from "axios";
+import "./product.css";
 import {
   getHeaderWithProjectIdAndBody,
   headerWithProjectIdOnly,
@@ -16,12 +17,12 @@ const WomanProducts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
   const {updateLoaderStatus} = useLoader()
-  const fetchProduct = async () => {
+  const fetchProduct = async (filter) => { 
     try {
       updateLoaderStatus(true)
-      const res = await getProductsBySearch(page, { gender: "Women" });
+      const res = await getProductsBySearch({ gender: "Women" });
       console.log("resWoman", res)
-      setProducts(res);
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     }finally{

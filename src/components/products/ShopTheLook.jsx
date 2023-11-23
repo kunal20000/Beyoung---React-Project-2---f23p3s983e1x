@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./product.css";
 import ProductsList from "./ProductsList";
 import { useSearchParams } from "react-router-dom";
 import { getProductsBySearch } from "../utils/getProductApi";
@@ -12,9 +13,9 @@ const ShopTheLook = () => {
   const fetchProduct = async () => {
     try {
       updateLoaderStatus(true)
-      const res = await getProductsBySearch(page, { sellerTag: "best seller" });
+      const res = await getProductsBySearch({ sellerTag: "best seller" });
        
-      setProducts(res);
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     }finally{

@@ -30,6 +30,7 @@ import Loader from "./Loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SingleOrder from "./myaccount/SingleOrder";
+import Products from "./products/Products";
 function App() {
   return (
     <AuthProvider>
@@ -40,6 +41,7 @@ function App() {
               <Navbar />
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/productslist" element={<ProductsList />} />
                 <Route path="/products/:id" element={<ProductComponent />} />
                 <Route path="/menproducts" element={<MenProducts />} />
@@ -63,7 +65,7 @@ function App() {
                 >
                   <Route path="profile" element={<MyProfile />} />
                   <Route path="order" element={<MyOrder />} />
-                  <Route path="order/:id" element={<SingleOrder/>}/>
+                  <Route path="order/:id" element={<SingleOrder />} />
                   <Route path="wishlist" element={<WishList />} />
                 </Route>
 
@@ -76,9 +78,9 @@ function App() {
                   <Route path="payment" element={<Payment />} />
                 </Route>
               </Routes>
-              <Loader/>
+              <Loader />
               <Footer />
-              <ToastContainer/>
+              <ToastContainer />
             </div>
           </LoaderProvider>
         </CheckoutProvider>

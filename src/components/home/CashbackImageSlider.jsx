@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./home.css";
-
+import Slider from 'react-slick';
 const CashbackImageSlider = () => {
   const [imageIndex, setImageIndex] = useState(0);
 

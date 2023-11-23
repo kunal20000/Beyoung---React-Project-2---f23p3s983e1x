@@ -14,9 +14,6 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
          closeModal(true);
       }
     };
-
-    
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -26,7 +23,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
       {isOpenHomeModal && (
         <section className="auth-modal" ref={modelRef}>
           <div className="auth-modal-subdiv">
-            <h5>Hello {userName}</h5>
+            <h5>Hello {userName.charAt(0).toUpperCase()+ userName.slice(1)}</h5>
             <button onClick={closeModal}>X</button>
           </div>
           <div className="link-container">

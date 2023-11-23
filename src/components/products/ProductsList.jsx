@@ -7,8 +7,10 @@ import { useUpdateWishlistNumbers } from "../context/CartNumberContext";
 import { useLoader } from "../context/LoaderContext";
 import { addToFavAPI } from "../utils/WishlistApi";
 import { toast } from "react-toastify";
+import FilterProducts from "./FilterProducts";
 
 const ProductsList = ({ products }) => {
+  console.log("Type of products:", typeof products);
   const { name, price, _id, displayImage, subCategory } = products;
   const loginStatus = useAuth();
   const setShowLoginModal = userUpdateLoginModalStatus();
@@ -46,10 +48,10 @@ const ProductsList = ({ products }) => {
   };
   return (
     <div className="product-container">
-      <div className="men-clothing">
-        <div className="filter-clothing">
-          <h5>Filter</h5>
-        </div>
+      {/* <div className="men-clothing"> */}
+        {/* <div className="filter-clothing">
+          <FilterProducts/>
+        </div> */}
 
         <div className="productListContainer">
           {
@@ -76,7 +78,7 @@ const ProductsList = ({ products }) => {
                       </div>
                     </a>
 
-                    <h6>{name}</h6>
+                    <h6 style={{textAlign:"start"}} >{name}</h6>
                     <div className="for-price-off">
                       <p className="inline-elements">₹{price}</p> &nbsp; &nbsp;
                       <span className="inline-elements">(50%off)</span>
@@ -88,7 +90,7 @@ const ProductsList = ({ products }) => {
          
           }
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

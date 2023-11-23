@@ -1,10 +1,10 @@
 .product-container {
-  margin-left: 70px;
+  margin-left: 178px;
   margin-right: 100px;
 }
 .men-clothing {
   display: flex;
-  gap: 200px;
+  gap: 10rem;
 }
 .heading-men-clothing {
   font-size: 20px;
@@ -14,7 +14,7 @@
   margin: 25px 0px 0px 0px;
 }
 .men-clothing-main {
-  margin-left: 312px;
+  margin: 0 auto;
   margin-bottom: 0px;
   width: 960px;
 }
@@ -44,6 +44,17 @@
   letter-spacing: 1px;
   line-height: 22px;
 }
+@media screen and (max-width:768px) {
+  .men-clothing-main{
+    width: 300px;
+  }
+  .product-container {
+    margin-left: 20px;
+    margin-right: 0px;
+  }
+  
+}
+/* product list */
 .productListContainer {
   display: flex;
   flex-wrap: wrap;
@@ -82,9 +93,7 @@
   height: auto;
   border-radius: 5px;
 }
-.product-container-male .image-for-male:hover {
-  background-image: url("https://www.beyoung.in/api/cache/catalog/products/…_plain_t-shirt_combo_hover_16_08_2023_700x933.jpg");
-}
+
 .product-container-male h6 {
   margin: 10px 0px 0px 0px;
   font-size: 14px;
@@ -105,6 +114,7 @@
 }
 .inline-elements {
   display: inline;
+  text-align: start;
 }
 .for-price-off p {
   margin: 0;
@@ -115,4 +125,170 @@
 .for-price-off span {
   color: #04ce00;
   font-size: 13px;
+}
+
+@media screen and (max-width:768px) {
+  .productListContainer{
+    margin-left: 20px;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .product-container-male{
+    width: 35%;
+  }
+  
+}
+/* for product list component */
+
+.products-list-compo-container {
+ 
+  margin: 1rem 5%;
+}
+
+.product-list-section>h3{
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.products-container{
+  display: flex;
+  gap: -20rem;
+}
+
+.product-filters {
+  
+  margin-top: 1.5rem;
+ 
+  
+  
+}
+.filters-heading{
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  background-color: #F5F5F5;
+  >h5{
+    display: inline-block;
+  }
+}
+.filter-btn{
+  display: flex;
+  padding: 15px;
+  justify-content: space-between;
+  >button{
+    border: none;
+    border-bottom: 1px solid;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    
+    cursor: pointer;
+    &:hover{
+    font-weight: 600;
+    }
+  }
+}
+.filters-container .MuiCheckbox-root:hover{
+  background-color: transparent !important;
+}
+.product-list-cards-container {
+  flex: 3;
+  display: flex;
+  flex-wrap: wrap;
+    padding: 0 4px;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.product-list-cards-container .product-card {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 20%;
+  background-color: #fff;
+  margin-top: 1.5rem;
+  border-radius: 5px 5px 0 0;
+  color: black;
+  text-decoration: none;
+  position: relative;
+}
+.product-list-cards-container .product-card h5 {
+  font-weight: 600;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0.4rem 0 0 0;
+}
+.product-list-cards-container .product-card p {
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0 0;
+}
+.product-list-cards-container .product-card img {
+  border-radius: 5px 5px 0 0;
+}
+.product-list-cards-container .product-card span {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.4rem;
+}
+.product-card .add-to-fav{
+    position: absolute;
+    border: none;
+    background-color: unset;
+    top: 3px;
+    right: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+}
+
+.no-products{
+  min-width: 95vw;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  >img{
+    max-width: 300px;
+    width: 100%;
+  }
+  >p{
+    padding: 1rem 3rem;
+    border-top: 1px solid black;
+    
+  }
+}
+
+@media (max-width:800px) {
+  .products-list-compo-container{
+    margin: 1rem 4%;
+  }
+}
+
+@media (max-width:700px) {
+  .products-container{
+    flex-direction: column;
+  }
+  .filters-container{
+    display: none;
+  }
+  .product-filters .collaps-active{
+    display: unset;
+  }
+}
+@media (max-width:500px) {
+  .product-list-cards-container .product-card{
+    width: 40%;
+  }
 }

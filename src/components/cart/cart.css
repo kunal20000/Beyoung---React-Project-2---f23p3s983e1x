@@ -37,7 +37,11 @@
     margin-bottom: 20px;
     cursor: pointer;
 }
-
+@media screen and (max-width:768px){
+  .image-container-cart button{
+    width: 50%;
+  }
+}
 /* CartComponet */
 .cart-container {
     display: flex;
@@ -110,7 +114,7 @@
       align-items: center;
       padding: 0.3rem;
       border-radius: 3px;
-      margin-top: auto;
+      /* margin-top: auto; */
       > select {
         height: 1.5rem;
         width: 3rem;
