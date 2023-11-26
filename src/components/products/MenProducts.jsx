@@ -11,22 +11,21 @@ const MenProducts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
   const [products, setProducts] = useState([]);
-  const {updateLoaderStatus} = useLoader()
+  const { updateLoaderStatus } = useLoader();
   const fetchProduct = async (filter) => {
     try {
-      updateLoaderStatus(true)
-      const res = await getProductsBySearch({gender: "Men"})
-      
+      updateLoaderStatus(true);
+      const res = await getProductsBySearch({ gender: "Men" });
+
       setProducts(res.data);
       console.log(res);
     } catch (error) {
       console.log("error", error);
-      
-    }finally{
-      updateLoaderStatus(false)
+    } finally {
+      updateLoaderStatus(false);
     }
   };
-  
+
   useEffect(() => {
     let filter = {};
     searchParams.forEach((value, key) => {
@@ -53,7 +52,9 @@ const MenProducts = () => {
         </div>
       </div>
 
-      <ProductsList products={products}  />
+      {/* {products.map((products, i) => ( */}
+        <ProductsList products={products} />
+      {/* ))} */}
     </div>
   );
 };

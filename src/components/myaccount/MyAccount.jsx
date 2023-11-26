@@ -79,8 +79,10 @@ const MyAccount = () => {
         >
           <nav>
             <NavLink to={'profile'}>Profile</NavLink>
+            <NavLink to={`address`}>Address</NavLink>
             <NavLink to={`order`}>Order</NavLink>
             <NavLink to={`wishlist`}>Wishlist</NavLink>
+            
           </nav>
           <button onClick={handleLogout}>logout</button>
         </div>

@@ -24,6 +24,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
   const { updateTotalItems, updateTotalPrice } = useCheckout();
 
   const [qty, setQty] = useState(quantity);
+  console.log("qty", qty)
   const updateCartNumbers = useUpdateCartNumbers();
   const updateWishlistNumbers = useWishlistNumbers();
 
@@ -90,7 +91,6 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
             <label htmlFor="quantity">QTY:</label>
             <select
               name="quantity"
-              id="quantity"
               value={qty}
               onChange={handleQtyChange}
             >

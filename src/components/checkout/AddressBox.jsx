@@ -26,7 +26,7 @@ const AddressBox = () => {
     const { name, value } = e.target;
     if (name === "zipCode" && value.length !== 6) {
       setErrors({ ...errors, [name]: true });
-    } else if (name === "street" && value.length > 6) {
+    } else if (name === "street" && value.length < 6) {
       setErrors({ ...errors, [name]: true });
     } else if (value.length < 3) {
       setErrors({ ...errors, [name]: true });

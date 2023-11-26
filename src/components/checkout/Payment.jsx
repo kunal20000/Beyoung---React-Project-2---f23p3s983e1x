@@ -5,6 +5,7 @@ import { useCheckout } from "../context/CheckoutContext";
 const Payment = () => {
   const { updatePaymentValid } = useCheckout();
   const [disableForm, setDisableForm] = useState(false);
+
   const [errors, setErrors] = useState({
     ccnum: false,
     name: false,
@@ -12,8 +13,12 @@ const Payment = () => {
     month: false,
     cvv: false,
   });
+
   const handleChangePaymentForm = (e) => {
     const { name, value } = e.target;
+    console.log("Name:", name);
+    console.log("Value:", value);
+   
     if (name === "ccnum" && value.length !== 16) {
       setErrors({ ...errors, [name]: true });
     } else if (name === "month" && value.length !== 2) {
@@ -43,8 +48,12 @@ const Payment = () => {
 
   return (
     <div className="cart-items-container payment-container">
-      <h5 style={{fontSize:"20px", fontWeight:"500"}}>Enter you Debit/Credit card details</h5>
-      <p style={{margin:"0px", fontSize:"18px", fontWeight:"500"}}>We do not store your card details:</p>
+      <h5 style={{ fontSize: "20px", fontWeight: "500" }}>
+        Enter you Debit/Credit card details
+      </h5>
+      <p style={{ margin: "0px", fontSize: "18px", fontWeight: "500" }}>
+        We do not store your card details:
+      </p>
       <section className="payment-form">
         <form onSubmit={handleFormSubmit}>
           <Grid container spacing={2}>
@@ -52,6 +61,7 @@ const Payment = () => {
               <TextField
                 label="Card Number"
                 type="number"
+                name="ccnum"
                 onChange={handleChangePaymentForm}
                 required
                 variant="outlined"
@@ -108,7 +118,7 @@ const Payment = () => {
               />
             </Grid>
             <Grid item xs={10}>
-              <TextField 
+              <TextField
                 label="CVV"
                 type="number"
                 name="cvv"
@@ -118,16 +128,21 @@ const Payment = () => {
                 fullWidth
                 disabled={disableForm}
                 error={errors.cvv}
-                helperText={errors.cvv ? ("CVV must be 3 digits only"):("")}
+                helperText={errors.cvv ? "CVV must be 3 digits only" : ""}
               />
             </Grid>
             <Grid item xs={12}>
               <Button
                 type="submit"
                 variant="outlined"
-                sx={{ width: "100%", marginTop: "1rem", backgroundColor:"blue", color:"#fff" }}
+                sx={{
+                  width: "100%",
+                  marginTop: "1rem",
+                  backgroundColor: "blue",
+                  color: "#fff",
+                }}
               >
-                {disableForm ? ("Edit Details"):("Confirm")}
+                {disableForm ? "Edit Details" : "Confirm"}
               </Button>
             </Grid>
           </Grid>

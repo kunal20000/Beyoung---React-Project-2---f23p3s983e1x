@@ -31,6 +31,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SingleOrder from "./myaccount/SingleOrder";
 import Products from "./products/Products";
+import MyAddress from "./myaccount/MyAddress";
 function App() {
   return (
     <AuthProvider>
@@ -64,6 +65,7 @@ function App() {
                   element={<ProtectedRoute component={<MyAccount />} />}
                 >
                   <Route path="profile" element={<MyProfile />} />
+                  <Route path="address" element={<MyAddress />} />
                   <Route path="order" element={<MyOrder />} />
                   <Route path="order/:id" element={<SingleOrder />} />
                   <Route path="wishlist" element={<WishList />} />

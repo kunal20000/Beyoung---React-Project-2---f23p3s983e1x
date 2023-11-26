@@ -23,7 +23,7 @@ const MenuProps = {
 };
 
 const FilterProducts = ({ values, type, filter, setFilter }) => {
-  console.log("values, type, filter",values, type, filter);
+  // console.log("values, type, filter",values, type, filter);
   const [selectedValues, setSelectedValues] = useState(filter[type] || []);
 
   useEffect(() => {

@@ -142,7 +142,7 @@ const Navbar = () => {
         <div className="secondSlide">
           <div className="secondSlide-Top">
             <div className="leftSide">
-              <a href="">
+              <a href={`myaccount/order`}>
                 <LocationLogo />
                 Track Order
               </a>

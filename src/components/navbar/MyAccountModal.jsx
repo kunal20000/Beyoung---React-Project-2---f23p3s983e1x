@@ -55,12 +55,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
               Wishlist
             </Link>
 
-            <Link
-              className="link-direction"
-              to={`myaccount/coupons`}
-            >
-              Coupons
-            </Link>
+            
           </div>
         </section>
       )}

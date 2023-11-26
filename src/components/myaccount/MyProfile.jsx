@@ -7,7 +7,9 @@ const MyProfile = () => {
 
   const name = JSON.parse(sessionStorage.getItem("userInfo"));
 
-  const [email, setEmail] = useState(JSON.parse(sessionStorage.getItem("userInfo")));
+  const email = JSON.parse(sessionStorage.getItem("userEmail"));
+  console.log("email", email);
+  const [emailCom, setEmailCom] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
@@ -54,7 +56,7 @@ const MyProfile = () => {
       
       if (res.status==='success') {
         toast.success('Profile updated succesfully!')
-        localStorage.setItem('useremail', email);
+        sessionStorage.setItem('useremail', email);
         
       }else if(res.status==='fail'){
         toast.error(res.message)
@@ -67,7 +69,7 @@ const MyProfile = () => {
     }
   };
   const discardData = () => {
-    setEmail(localStorage.getItem("useremail"));
+    setEmailCom(localStorage.getItem("useremail"));
     setPassword("");
     setNewPassword("");
     setIsFormActive(false);

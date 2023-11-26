@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import FilterProducts from "./FilterProducts";
 
 const ProductsList = ({ products }) => {
-  console.log("Type of products:", typeof products);
+
   const { name, price, _id, displayImage, subCategory } = products;
   const loginStatus = useAuth();
   const setShowLoginModal = userUpdateLoginModalStatus();

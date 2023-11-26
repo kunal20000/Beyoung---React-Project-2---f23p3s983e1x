@@ -67,7 +67,7 @@ const ProductsListComponent = ({ products, pageNo }) => {
         color.length === 0 || color.includes(product.color.toLowerCase());
       return subCategoryFilter && brandFilter && colorFilter;
     });
-
+    console.log("Filtered Result:", filteredResult);
     setFilteredProducts(filteredResult);
   };
 
@@ -80,19 +80,21 @@ const ProductsListComponent = ({ products, pageNo }) => {
     setFilteredProducts(products);
   };
 
+  console.log("Filtered Products:", filteredProducts.length);
   const itemsToDisplay = filteredProducts.slice(0, pageNo * 20);
-
+  console.log("Items to Display:", itemsToDisplay.length);
   return (
     <div className="products-list-compo-container">
       <section className="product-list-section">
-        
         <div className="products-container">
           <div className="product-filters">
             <section
-              className="filters-heading" 
+              className="filters-heading"
               onClick={() => setCollapsActive(!collapsActive)}
             >
-              <h5 style={{textAlign:"center", margin:"10px auto"}}>Filters</h5>
+              <h5 style={{ textAlign: "center", margin: "10px auto" }}>
+                Filters
+              </h5>
               {isSmallScreen && <ExpandMoreIcon />}
             </section>
 
@@ -130,7 +132,7 @@ const ProductsListComponent = ({ products, pageNo }) => {
             </div>
           </div>
 
-          {<ProductsList products={products} />}
+          <ProductsList products={products} />
         </div>
       </section>
     </div>

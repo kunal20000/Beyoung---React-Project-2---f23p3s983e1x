@@ -13,18 +13,18 @@ const Combos = () => {
   const [page, setPage] = useState(2);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
-  const {updateLoaderStatus} = useLoader()
+  const { updateLoaderStatus } = useLoader();
 
   const fetchProduct = async (filter) => {
     try {
-      updateLoaderStatus(true)
-      const res = await getProductsBySearch({subCategory: "Shirt"})
-       
+      updateLoaderStatus(true);
+      const res = await getProductsBySearch({ subCategory: "Shirt" });
+
       setProducts(res.data);
     } catch (error) {
       console.log(error);
-    }finally{
-      updateLoaderStatus(false)
+    } finally {
+      updateLoaderStatus(false);
     }
   };
 
@@ -43,17 +43,18 @@ const Combos = () => {
   return (
     <div>
       <div className="men-clothing-main">
-        <h5 className="heading-men-clothing">COMBOS (UNISEX)</h5>
-        <div>
-          <p className="for-p">
-            Combo T Shirts - Buy T Shirt Combos Online in India at Low Price.
-            Latest Collection of Plain and Printed Combo T shirts For Mens
-            Online at Beyoung. ✓ Pack of 3 & 4 Combo T-shirts ✓Big Discounts
-            ✓Free Shipping ✓COD.
-          </p>
-        </div>
+        <h5>COMBOS (UNISEX)</h5>
+        <p>
+          Combo T Shirts - Buy T Shirt Combos Online in India at Low Price.
+          Latest Collection of Plain and Printed Combo T shirts For Mens Online
+          at Beyoung. ✓ Pack of 3 & 4 Combo T-shirts ✓Big Discounts ✓Free
+          Shipping ✓COD.
+        </p>
       </div>
-      <ProductsList products={products} />
+
+      {/* {products.map((products, i) => ( */}
+        <ProductsList products={products}  />
+      {/* ))} */}
     </div>
   );
 };

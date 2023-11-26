@@ -35,18 +35,22 @@ const ProductComponent = () => {
   const updateWishlistNumbers = useUpdateWishlistNumbers();
   const setShowLoginModal = userUpdateLoginModalStatus();
   const { updateLoaderStatus } = useLoader();
-  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedImage, setSelectedImage] = useState("");
   const { updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
   const [selectedSize, setSelectedSize] = useState(false);
+
   const fetchProduct = async () => {
     try {
+      updateLoaderStatus(true)
       const res = await getProductById(id);
       setProduct(res);
       setSelectedImage(res.displayImage); // Set default image
       console.log(res);
     } catch (error) {
       console.log(error);
+    }finally{
+      updateLoaderStatus(false);
     }
   };
 
@@ -64,7 +68,7 @@ const ProductComponent = () => {
   const handleAddToCart = async () => {
     if (loginStatus) {
       try {
-        setIsLoading(true);
+         updateLoaderStatus(true);
         const res = await addItemToCart(id, selectedQty);
         if (res.status === "success") {
           toast.success(res.message);
@@ -77,7 +81,7 @@ const ProductComponent = () => {
       } catch (err) {
         console.log(err);
       } finally {
-        setIsLoading(false);
+        updateLoaderStatus(false);
       }
     } else {
       setShowLoginModal(true);
@@ -105,6 +109,7 @@ const ProductComponent = () => {
   const handleImageClick = (image) => {
     setSelectedImage(image);
   };
+  const [randomRating] = useState((Math.random() * 5).toFixed(1));
   return (
     <div className="product-component-container">
       <div className="product-component-box">
@@ -134,14 +139,10 @@ const ProductComponent = () => {
             Inclusive of All Taxes + Free Shipping
           </span>
           <section className="rating-container">
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
+           <Rating name="read-only" value={randomRating} readOnly/>
             &nbsp;
             <p>
-              {(Math.random() * 5).toFixed(1)} ratings and{" "}
+              {randomRating} ratings and{" "}
               {Math.floor(Math.random() * 10000) + 1000} reviews
             </p>
           </section>
@@ -235,8 +236,8 @@ const ProductComponent = () => {
         <h3>Rating & Reviews</h3>
         <div className="ratings-review-section">
           <div className="review-section-left">
-            <h3>4.8</h3>
-            <Rating name="read-only" value={5} readOnly />
+            <h3>{randomRating}</h3>
+            <Rating name="read-only" value={randomRating} readOnly />
             <p>Based on 31K+ ratings and 9K+ reviews</p>
           </div>
           <div className="review-section-right">

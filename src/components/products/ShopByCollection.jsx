@@ -39,9 +39,9 @@ const ShopByCollection = () => {
   return (
     <div>
       <div className="men-clothing-main">
-        <h5 className="heading-men-clothing">SHOP By Collection</h5>
+        <h5>SHOP By Collection</h5>
         <div>
-          <p className="for-p">
+          <p >
             <b>Trending</b>
             &nbsp; With the latest Active Trending shirts and pants for Men and woman, you can bring
             revolution in your fitness. Designed from the superior cool rush
@@ -51,7 +51,9 @@ const ShopByCollection = () => {
           </p>
         </div>
       </div>
-      <ProductsList products={products} />
+     
+        <ProductsList products={products} />
+      
     </div>
   );
 };

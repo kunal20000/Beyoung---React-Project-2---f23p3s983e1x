@@ -37,11 +37,13 @@ const Goggers = () => {
   return (
     <div>
       <div className="men-clothing-main">
-        <h5 style={{ marginBottom: "30px" }} className="heading-men-clothing">
+        <h5 style={{ marginBottom: "30px" }}>
           ALL PURPOSE JOGGERS
         </h5>
       </div>
-      <ProductsList products={products} />
+      {/* {products.map((products, i) => ( */}
+        <ProductsList products={products} />
+      {/* ))} */}
     </div>
   );
 };

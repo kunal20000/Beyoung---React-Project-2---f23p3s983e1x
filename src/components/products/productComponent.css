@@ -15,13 +15,17 @@
   gap: 0.3rem;
 }
 .product-left img {
-  height: 450px;
+  height: 470px;
   width: 450px;
 }
-
+.forImageShowing{
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
 .forImageShowing img {
   display: flex;
-  gap: 0.5rem;
+  gap: 0rem;
   width: 6.5rem;
   height: 5.6rem;
   cursor: pointer;

@@ -75,6 +75,7 @@ const SignUp = ({ isOpen, closeModal }) => {
         setSuceessMessage("Account created succesffuly!");
         sessionStorage.setItem("authToken", res.data.token);
         sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.user));
+        sessionStorage.setItem("userEmail", JSON.stringify(res.data.data.user.email));
         closeModal(true);
         setLoader(true);
         toast.success("Please Login!");

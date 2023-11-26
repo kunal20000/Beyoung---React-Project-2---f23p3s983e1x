@@ -16,17 +16,17 @@ const WomanProducts = () => {
   const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
-  const {updateLoaderStatus} = useLoader()
-  const fetchProduct = async (filter) => { 
+  const { updateLoaderStatus } = useLoader();
+  const fetchProduct = async (filter) => {
     try {
-      updateLoaderStatus(true)
+      updateLoaderStatus(true);
       const res = await getProductsBySearch({ gender: "Women" });
-      console.log("resWoman", res)
+      console.log("resWoman", res);
       setProducts(res.data);
     } catch (error) {
       console.log(error);
-    }finally{
-      updateLoaderStatus(false)
+    } finally {
+      updateLoaderStatus(false);
     }
   };
 
@@ -45,20 +45,20 @@ const WomanProducts = () => {
   return (
     <div>
       <div className="men-clothing-main">
-        <h5 className="heading-men-clothing">Women clothing</h5>
-        <div>
-          <p className="for-p">
-            <b>Women clothing</b>
-            &nbsp; Get your hands on stylish and comfortable clothing for women
-            - Buy a range of ladies' clothing online at affordable prices.
-            Beyoung offers the latest collection of Kurtis, shirts, tops,
-            t-shirts, pants, boxers, and jeggings with existing offers and
-            discounts. Find women's clothing for formal to weekend outings in
-            all styles. Free Shipping | COD | S - 4XL Sizes | 15 Days Return
-          </p>
-        </div>
+        <h5>Women clothing</h5>
+        <p>
+          <b>Women clothing</b>
+          &nbsp; Get your hands on stylish and comfortable clothing for women -
+          Buy a range of ladies' clothing online at affordable prices. Beyoung
+          offers the latest collection of Kurtis, shirts, tops, t-shirts, pants,
+          boxers, and jeggings with existing offers and discounts. Find women's
+          clothing for formal to weekend outings in all styles. Free Shipping |
+          COD | S - 4XL Sizes | 15 Days Return
+        </p>
       </div>
-      <ProductsList products={products} />
+    
+        <ProductsList products={products} />
+     
     </div>
   );
 };

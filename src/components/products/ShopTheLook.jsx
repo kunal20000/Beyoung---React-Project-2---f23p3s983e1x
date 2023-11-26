@@ -9,17 +9,17 @@ const ShopTheLook = () => {
   const [page, setPage] = useState(2);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filter, setFilter] = useState({});
-  const { updateLoaderStatus } = useLoader()
+  const { updateLoaderStatus } = useLoader();
   const fetchProduct = async () => {
     try {
-      updateLoaderStatus(true)
+      updateLoaderStatus(true);
       const res = await getProductsBySearch({ sellerTag: "best seller" });
-       
+
       setProducts(res.data);
     } catch (error) {
       console.log(error);
-    }finally{
-      updateLoaderStatus(false)
+    } finally {
+      updateLoaderStatus(false);
     }
   };
 
@@ -38,20 +38,20 @@ const ShopTheLook = () => {
   return (
     <div>
       <div className="men-clothing-main">
-        <h5 className="heading-men-clothing">SHOP THE LOOK</h5>
-        <div>
-          <p className="for-p">
-            <b>Shop the Look</b>
-            &nbsp; From casual to formal, we've added a wide selection of
-            outfits to make you look your best and feel confident. Get a perfect
-            look for dinner dates to lounging around in no time at the most
-            affordable price on Beyoung. Each clothing set is carefully curated
-            by our in-house designers to give you a stylish look and comfortable
-            fit. Scroll down to find the best look for you.
-          </p>
-        </div>
+        <h5>SHOP THE LOOK</h5>
+         <p>
+          <b>Shop the Look</b>
+          &nbsp; From casual to formal, we've added a wide selection of outfits
+          to make you look your best and feel confident. Get a perfect look for
+          dinner dates to lounging around in no time at the most affordable
+          price on Beyoung. Each clothing set is carefully curated by our
+          in-house designers to give you a stylish look and comfortable fit.
+          Scroll down to find the best look for you.
+        </p>
       </div>
-      <ProductsList products={products} />
+     
+        <ProductsList products={products}  />
+      
     </div>
   );
 };
