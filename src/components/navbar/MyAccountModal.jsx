@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
   const navigate = useNavigate();
-  const userName = JSON.parse(sessionStorage.getItem("userInfo"));
+  const userName = sessionStorage.getItem("username");
   const modelRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
 
             <Link
               className="link-direction"
-              to={`/address`}
+              to={`myaccount/address`}
             >
               Address
             </Link>

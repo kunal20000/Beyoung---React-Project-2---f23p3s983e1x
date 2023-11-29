@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getAuthHeaderConfig } from "./getHeader";
 import { apiURL } from "./getProductApi";
+import { toast } from "react-toastify";
 
 
 export const addItemToCart = async (id, qty) => {
@@ -52,8 +53,18 @@ export const deleteItemFromCart = async (id) => {
   }
 };
 
-export const updateCredentialsAPI = async(body)=>{
+export const updateCredentialsAPI = async(body,type)=>{
   const headers = getAuthHeaderConfig();
+
+  let requestUrl = apiURL;
+  if(type == "password"){
+    requestUrl += "/user/updateMyPassword"
+  }else if(type == "username"){
+    requestUrl += "/user/updateme"
+  }else{
+    toast.error("something went wrong");
+    return;
+  }
 
   try {
     const res = await axios.patch(`${apiURL}api/v1/user/updateMyPassword`,body,headers)

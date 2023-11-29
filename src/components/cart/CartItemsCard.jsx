@@ -13,18 +13,18 @@ import { useLoader } from "../context/LoaderContext";
 import { addToFavAPI } from "../utils/WishlistApi";
 import "./cart.css";
 const CartItemsCard = ({ product, removeProductFromState }) => {
-  console.log("product", product);
+  // console.log("product", product);
 
   const {
     product: { _id, name, displayImage, price },
     quantity,
   } = product;
 
-  console.log("quantity", quantity);
+  // console.log("quantity", quantity);
   const { updateTotalItems, updateTotalPrice } = useCheckout();
 
   const [qty, setQty] = useState(quantity);
-  console.log("qty", qty)
+  // console.log("qty", qty)
   const updateCartNumbers = useUpdateCartNumbers();
   const updateWishlistNumbers = useWishlistNumbers();
 

@@ -50,7 +50,7 @@ const SignUp = ({ isOpen, closeModal }) => {
       setEmailErr(false);
     }
 
-    if (name === "password" && value.length > 6) {
+    if (name === "password" && value.length < 6) {
       setPasswordErr("Password must be at least 6 characters long.");
     } else {
       setPasswordErr(false);
@@ -74,8 +74,8 @@ const SignUp = ({ isOpen, closeModal }) => {
         console.log(res.data.token);
         setSuceessMessage("Account created succesffuly!");
         sessionStorage.setItem("authToken", res.data.token);
-        sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.user));
-        sessionStorage.setItem("userEmail", JSON.stringify(res.data.data.user.email));
+        sessionStorage.setItem("userEmail", res.data.data.user.email);
+        sessionStorage.setItem("username", res.data.data.user.name);
         closeModal(true);
         setLoader(true);
         toast.success("Please Login!");
@@ -83,7 +83,7 @@ const SignUp = ({ isOpen, closeModal }) => {
         toast.error(res.message);
       }
     } catch (err) {
-      toast.error("Something went wrong!Please try again later.");
+      toast.error(err.response.data.message);
       console.log(err);
     } finally {
       setLoader(false);

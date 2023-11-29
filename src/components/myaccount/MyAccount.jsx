@@ -11,9 +11,9 @@ import {
   useUpdateWishlistNumbers,
 } from "../context/CartNumberContext";
 const MyAccount = () => {
-  const name = JSON.parse(sessionStorage.getItem("userInfo"));
-  console.log("name", name);
-  const email = JSON.parse(sessionStorage.getItem("userInfo"));
+  const name = sessionStorage.getItem("username");
+ 
+  const email = sessionStorage.getItem("userEmail");
 
   const updateLoginStatus = useUpdateLoginStatus();
   const updateCartNumbers =  useUpdateCartNumbers();

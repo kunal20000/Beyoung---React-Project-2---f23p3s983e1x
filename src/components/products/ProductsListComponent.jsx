@@ -80,9 +80,9 @@ const ProductsListComponent = ({ products, pageNo }) => {
     setFilteredProducts(products);
   };
 
-  console.log("Filtered Products:", filteredProducts.length);
+  // console.log("Filtered Products:", filteredProducts.length);
   const itemsToDisplay = filteredProducts.slice(0, pageNo * 20);
-  console.log("Items to Display:", itemsToDisplay.length);
+  // console.log("Items to Display:", itemsToDisplay.length);
   return (
     <div className="products-list-compo-container">
       <section className="product-list-section">
@@ -132,7 +132,7 @@ const ProductsListComponent = ({ products, pageNo }) => {
             </div>
           </div>
 
-          <ProductsList products={products} />
+          <ProductsList products={filteredProducts} />
         </div>
       </section>
     </div>

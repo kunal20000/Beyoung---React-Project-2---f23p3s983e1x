@@ -81,7 +81,8 @@ const Login = ({ isOpen, closeModal }) => {
         toast.success("Logged In Sucessfully");
         sessionStorage.setItem("loginStatus", true);
         sessionStorage.setItem("authToken", res.data.token);
-        sessionStorage.setItem("userInfo", JSON.stringify(res.data.data.name));
+        sessionStorage.setItem("username", res.data.data.name);
+        sessionStorage.setItem("userEmail", res.data.data.email);
         
         const numberOfCartItems = await getnumberOfCartItems();
         const numberOfWishlistItems = await getNumberOfWishlistItems();
