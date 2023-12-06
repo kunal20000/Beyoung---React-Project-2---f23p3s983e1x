@@ -58,16 +58,16 @@ export const updateCredentialsAPI = async(body,type)=>{
 
   let requestUrl = apiURL;
   if(type == "password"){
-    requestUrl += "/user/updateMyPassword"
+    requestUrl += "api/v1/user/updateMyPassword"
   }else if(type == "username"){
-    requestUrl += "/user/updateme"
+    requestUrl += "api/v1/user/updateme"
   }else{
     toast.error("something went wrong");
     return;
   }
 
   try {
-    const res = await axios.patch(`${apiURL}api/v1/user/updateMyPassword`,body,headers)
+    const res = await axios.patch(requestUrl, body,headers)
     
     return res.data
   } catch (error) {

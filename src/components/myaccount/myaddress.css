@@ -1,0 +1,75 @@
+.shipping-address-container {
+  margin: 0 25%;
+}
+.shipping-address-container > h4 {
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.add-address-box {
+  display: block;
+  border: 1.5px solid rgb(115, 200, 203);
+  box-shadow: rgba(115, 200, 203, 0.1) 0px 0px 20px 0px;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 8px;
+  padding: 20px 20px;
+}
+.add-address-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  color: rgb(24, 24, 24);
+  opacity: 0.5;
+  font-size: 13px;
+}
+.add-address-box input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 8px 0px;
+  border: none;
+  outline: none;
+}
+.box1-css {
+  border-bottom: 1px solid rgb(230, 230, 230);
+  margin-bottom: 15px;
+}
+
+.btn-forAddress {
+  margin: 0px 20px;
+  padding: 20px 20px;
+  width: 400px;
+  border: 1.5px solid rgb(115, 200, 203);
+  border-radius: 8px;
+  background: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  justify-content: flex-start;
+  box-shadow: rgba(115, 200, 203, 0.1) 0px 0px 20px 0px;
+}
+.add-address-box button{
+    background: rgb(254, 235, 0);
+    border-radius: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 15px;
+    cursor: pointer;
+
+}
+.btn-address {
+    display: flex;
+    gap: 10px;
+}
+.add-address-box button:first-of-type{
+   
+   width: 70%;
+}

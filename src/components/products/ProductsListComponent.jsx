@@ -80,7 +80,7 @@ const ProductsListComponent = ({ products, pageNo }) => {
     setFilteredProducts(products);
   };
 
-  // console.log("Filtered Products:", filteredProducts.length);
+  
   const itemsToDisplay = filteredProducts.slice(0, pageNo * 20);
   // console.log("Items to Display:", itemsToDisplay.length);
   return (

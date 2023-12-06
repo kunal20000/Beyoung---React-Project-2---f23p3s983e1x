@@ -8,7 +8,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { updateCredentialsAPI } from "../utils/CartApi";
 import { toast } from "react-toastify";
 
@@ -23,25 +23,44 @@ const MyProfile = () => {
   const [newPassword, setNewPassword] = useState("");
 
   const [username, setUsername] = useState(currentName);
+
   const [isFormActive, setIsFormActive] = useState(false);
   const [editingUsername, setEditingUsername] = useState(false);
   const [editingPass, setEditingPass] = useState(false);
+  const [editingGender, setEditingGender] = useState(false);
+  const [editingBirth, setEditingBirth] = useState(false);
+  const [editingNumber, setEditingNumber] = useState(false);
 
-  const [birthdate, setBirthdate] = useState(
-    sessionStorage.getItem("userBirthdate") || ""
-  );
-  const [gender, setGender] = useState(
-    sessionStorage.getItem("userGender") || ""
-  );
-  const [phoneNumber, setPhoneNumber] = useState(
-    sessionStorage.getItem("userPhoneNumber") || ""
-  );
+  const [birthdate, setBirthdate] = useState("");
+  const [gender, setGender] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  // for all field save data when user refresh page
+  useEffect(() => {
+    const storedData = localStorage.getItem("email");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      setPhoneNumber(parsedData.phoneNumber || "");
+      setGender(parsedData.gender || "");
+      setBirthdate(parsedData.birthdate || "");
+    }
+  }, []); 
+  useEffect(() => {
+    // Update localStorage whenever all field changes
+    localStorage.setItem(
+      "email",
+      JSON.stringify({ phoneNumber, gender, birthdate })
+    );
+  }, [phoneNumber, gender, birthdate]);
+
   const [loading, setLoading] = useState(false);
 
   const [errors, setErrors] = useState({
     username: false,
     pass: false,
     newpass: false,
+    gender: false,
+    birthdate: false,
+    phoneNumber: false,
   });
 
   const enableFordEdit = (e) => {
@@ -51,6 +70,12 @@ const MyProfile = () => {
       setEditingUsername(true);
     } else if (value === "pass") {
       setEditingPass(true);
+    } else if (value === "gender") {
+      setEditingGender(true);
+    } else if (value === "birthdate") {
+      setEditingBirth(true);
+    } else if (value === "phoneNumber") {
+      setEditingNumber(true);
     }
   };
   const updateData = async () => {
@@ -77,8 +102,14 @@ const MyProfile = () => {
     try {
       setLoading(true);
       const res = await updateCredentialsAPI(body, updateType);
-
+      console.log("resUpdate", res);
       if (res.status === "success") {
+        const updatedData = {
+          phoneNumber: phoneNumber,
+          gender: gender,
+          birthdate: birthdate,
+        };
+        localStorage.setItem(email, JSON.stringify(updatedData));
         toast.success("Profile updated succesfully!");
         sessionStorage.setItem("username", username);
         setCurrentName(username);
@@ -100,6 +131,7 @@ const MyProfile = () => {
   };
   const discardData = () => {
     setUsername(currentName);
+
     setPassword("");
     setNewPassword("");
     setIsFormActive(false);
@@ -134,7 +166,7 @@ const MyProfile = () => {
   };
   const handleBirthdayChange = (e) => {
     const inputDate = e.target.value;
-    const dateFormat = /^\d{2}-\d{2}-\d{4}$/;
+    const dateFormat = /^\d{4}-\d{2}-\d{2}$/; // Update the date format to match the input type
 
     if (inputDate === "" || dateFormat.test(inputDate)) {
       setBirthdate(inputDate);
@@ -153,10 +185,7 @@ const MyProfile = () => {
   return (
     <div className="my-profile-section">
       <Avatar sx={{ height: "100px", width: "100px", background: "black" }}>
-        {currentName
-          .split(" ")
-          .map((word) => word[0].toUpperCase())
-          .join(" ")}
+        {currentName.charAt(0).toUpperCase() + currentName.slice(1)}
       </Avatar>
       <Grid sx={{ margin: "2rem 4rem" }} container spacing={2}>
         <Grid item xs={12}>

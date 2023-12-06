@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { addItemToCart } from "../utils/CartApi";
 import { Link } from "react-router-dom";
 import "./wishlist.css";
+
+
 const WishlistCard = ({ product, removeProductFromState }) => {
   const itemid = product._id;
   const {
@@ -94,8 +96,7 @@ const WishlistCard = ({ product, removeProductFromState }) => {
         </button>
       </Stack>
       <button onClick={handleRemoveItem} className="remove-from-wish-btn">
-        {" "}
-        X{" "}
+        X
       </button>
     </div>
   );

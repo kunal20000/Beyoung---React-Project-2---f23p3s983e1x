@@ -75,8 +75,10 @@ const Login = ({ isOpen, closeModal }) => {
         userInfo,
         header
       );
+      
       console.log(res);
       if (res.data.token) {
+        
         setSuceessMessage("logged sucessfully");
         toast.success("Logged In Sucessfully");
         sessionStorage.setItem("loginStatus", true);

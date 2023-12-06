@@ -34,6 +34,7 @@ const SignUp = ({ isOpen, closeModal }) => {
     email: "",
     password: "",
     appType: "ecommerce",
+   
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,9 +77,10 @@ const SignUp = ({ isOpen, closeModal }) => {
         sessionStorage.setItem("authToken", res.data.token);
         sessionStorage.setItem("userEmail", res.data.data.user.email);
         sessionStorage.setItem("username", res.data.data.user.name);
+        
         closeModal(true);
         setLoader(true);
-        toast.success("Please Login!");
+        toast.success("Please Login!"); 
       } else {
         toast.error(res.message);
       }

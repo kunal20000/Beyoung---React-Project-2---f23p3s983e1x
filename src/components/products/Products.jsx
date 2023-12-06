@@ -49,17 +49,17 @@ const Products = () => {
     }
 
     setPreviousSearchParams(searchParams.toString());
-    
+    console.log("Search Params:", searchParams.toString());
     fetchProducts(filter);
   }, [searchParams]);
 
-  const isEmpty = !Object.keys(products).length;
+   const isEmpty = !Object.keys(products).length;
   // console.log("isEmpty", isEmpty);
-
+  
   return (
     <div>
       {isEmpty ? (
-        <NoProducts />
+        <NoProducts searchValue={searchParams.get("name")} />
       ) : (
         <ProductsListComponent  products={products} pageNo={pageNo} />
       )}
