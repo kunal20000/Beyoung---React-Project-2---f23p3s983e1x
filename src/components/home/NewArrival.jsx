@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import './newArrival.css';
+import "./newArrival.css";
 
 const NewArrival = () => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -13,7 +13,7 @@ const NewArrival = () => {
     "./images/new5.jpg",
     "./images/new6.jpg",
     "./images/new7.jpg",
-    "./images/new8.jpg"
+    "./images/new8.jpg",
   ];
   const imagesToShow = 4;
   const nextImage = () => {
@@ -33,16 +33,15 @@ const NewArrival = () => {
         </div>
 
         <div className="image-slider">
-          {images
-            .slice(imageIndex, imageIndex + imagesToShow)
-            .map((image, i) => (
-              <img width="400px"
-                style={{ padding: "10px 10px" }}
-                key={i}
-                src={image}
-                alt={`Image ${i}`}
-              />
-            ))}
+          {Array.from({ length: imagesToShow }).map((_, i) => (
+            <img
+              width={`${100 / imagesToShow}%`}
+              style={{ padding: "10px 10px" }}
+              key={i}
+              src={images[(imageIndex + i) % images.length]}
+              alt={`Image ${(imageIndex + i) % images.length}`}
+            />
+          ))}
         </div>
 
         <div onClick={nextImage}>

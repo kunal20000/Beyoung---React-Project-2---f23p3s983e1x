@@ -25,8 +25,6 @@ const BigSavingZone = () => {
     );
   };
 
-  
-
   return (
     <div className="big-saving-zone">
       <p className="headaing-zone">big saving zone</p>
@@ -36,20 +34,17 @@ const BigSavingZone = () => {
         </div>
 
         <div className="image-slider">
-          {images
-            .slice(imageIndex, imageIndex + imagesToShow)
-            .map((image, i) => (
-              <Link key={i} to={`/shopthelook`}>
-                <img
-                  className="big-save-image"
-                  width="400px"
-                  style={{ padding: "10px 10px" }}
-                  key={i}
-                  src={image}
-                  alt={`Image ${i}`}
-                />
-              </Link>
-            ))}
+          {Array.from({ length: imagesToShow }).map((_, i) => (
+            <Link key={i} to={`/shopthelook`}>
+              <img
+                className="big-save-image"
+                width={`${100 / imagesToShow}%`}
+                style={{ padding: "10px 10px" }}
+                src={images[(imageIndex + i) % images.length]}
+                alt={`Image ${(imageIndex + i) % images.length}`}
+              />
+            </Link>
+          ))}
         </div>
 
         <div onClick={nextImage}>
