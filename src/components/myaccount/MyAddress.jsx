@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./myaddress.css";
+import { json } from "react-router-dom";
 
 const MyAddress = () => {
   const [showAddAddress, setShowAddAddress] = useState(false);
@@ -11,6 +12,7 @@ const MyAddress = () => {
     city: "",
     state: "",
   });
+  const [savedAddresses, setSaveAddresses] = useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,24 +21,6 @@ const MyAddress = () => {
       [name]: value,
     }));
   };
-
-  const handleSaveAddress = () => {
-    // Handle saving the address logic here
-   
-    console.log("Saved address:", formData);
-
-    // Reset the form data and hide the add address box
-    setFormData({
-      fullName: "",
-      phoneNumber: "",
-      pincode: "",
-      address: "",
-      city: "",
-      state: "",
-    });
-    setShowAddAddress(false);
-  };
-
   const handleCancel = () => {
     // Reset the form data and hide the add address box
     setFormData({
@@ -48,6 +32,51 @@ const MyAddress = () => {
       state: "",
     });
     setShowAddAddress(false);
+  };
+  useEffect(() => {
+    // Load saved addresses from localStorage on component mount
+    const savedAddressFromLocalstorage =
+      JSON.parse(localStorage.getItem("addresses")) || [];
+    setSaveAddresses(savedAddressFromLocalstorage);
+  }, []);
+  const handleSaveAddress = () => {
+    // Handle saving the address logic here
+
+    // Save the form data in localStorage
+    const updatedAddresses = [...savedAddresses, formData];
+
+    localStorage.setItem("addresses", JSON.stringify(updatedAddresses));
+    console.log("Saved address:", formData);
+
+    // Reset the form data and hide the add address box
+    setFormData({
+      fullName: "",
+      phoneNumber: "",
+      pincode: "",
+      address: "",
+      city: "",
+      state: "",
+    });
+    setSaveAddresses(updatedAddresses);
+    setShowAddAddress(false);
+  };
+
+  
+
+  const handleEditAddress = (index) => {
+    // Set the form data to the selected address for editing
+    const selectedAddress = savedAddresses[index];
+    setFormData(selectedAddress);
+
+    // Show the add address box for editing
+    setShowAddAddress(true);
+  };
+  const handleRemoveAddress = (index) => {
+    // Remove the address from the list and update localStorage
+
+    const updatedAddresses = savedAddresses.filter((_, i) => i != index);
+    localStorage.setItem("addresses", JSON.stringify(updatedAddresses));
+    setSaveAddresses(updatedAddresses);
   };
   return (
     <div className="shipping-address-container">
@@ -77,7 +106,6 @@ const MyAddress = () => {
               onChange={handleInputChange}
               placeholder="Phone Number"
               required
-              
             />
           </div>
           <div className="box1-css">
@@ -90,7 +118,6 @@ const MyAddress = () => {
               onChange={handleInputChange}
               placeholder="Pincode"
               required
-              maxlength="6"
             />
           </div>
           <div className="box1-css">
@@ -129,9 +156,9 @@ const MyAddress = () => {
               required
             />
           </div>
-         <div className="btn-address">
-          <button onClick={handleSaveAddress}>SAVE</button>
-          <button onClick={handleCancel}>CANCEL</button>
+          <div className="btn-address">
+            <button onClick={handleSaveAddress}>SAVE</button>
+            <button onClick={handleCancel}>CANCEL</button>
           </div>
         </div>
       ) : (
@@ -142,6 +169,21 @@ const MyAddress = () => {
           + Add New Address
         </button>
       )}
+
+      {/* Display saved addresses */}
+      {savedAddresses.map((address, index) => (
+        <div key={index} className="saved-address-box">
+          <div className="css-x5bfim">
+            <p>{address.fullName}</p>
+            <p>{address.address}</p>
+            <p>Contact Number: {address.phoneNumber}</p>
+            <div className="btn-saved-address">
+              <button onClick={() => handleEditAddress(index)}>EDIT</button>
+              <button onClick={() => handleRemoveAddress(index)}>DELETE</button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

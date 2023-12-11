@@ -40,7 +40,6 @@
 }
 
 .btn-forAddress {
-  margin: 0px 20px;
   padding: 20px 20px;
   width: 400px;
   border: 1.5px solid rgb(115, 200, 203);
@@ -53,23 +52,58 @@
   justify-content: flex-start;
   box-shadow: rgba(115, 200, 203, 0.1) 0px 0px 20px 0px;
 }
-.add-address-box button{
-    background: rgb(254, 235, 0);
-    border-radius: 8px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 15px;
-    cursor: pointer;
-
+.add-address-box button {
+  background: rgb(254, 235, 0);
+  border-radius: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 15px;
+  cursor: pointer;
 }
 .btn-address {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
-.add-address-box button:first-of-type{
-   
-   width: 70%;
+.add-address-box button:first-of-type {
+  width: 70%;
+}
+.saved-address-box {
+  display: flex;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 5px 0px;
+  padding: 10px 20px;
+  margin-top: 15px;
+}
+.css-x5bfim {
+  padding: 5px 0px 10px 10px;
+}
+.css-x5bfim > p {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 15px;
+  letter-spacing: -0.15px;
+  text-transform: capitalize;
+  padding: 5px 0px;
+  margin: 0px;
+}
+.saved-address-box p {
+  font-size: 16px;
+  font-weight: 400;
+}
+.btn-saved-address button {
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  background: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  display: inline-block;
+  padding: 6px 30px;
+  margin-right: 10px;
+  cursor: pointer;
 }

@@ -7,8 +7,8 @@ import { getCartItems } from "../utils/CartApi";
 import TotalPriceBox from "../checkout/TotalPriceBox";
 
 const CartComponent = () => {
-    
-  const { products, updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
+  const { products, updateProducts, updateTotalItems, updateTotalPrice } =
+    useCheckout();
   const { updateLoaderStatus } = useLoader();
   const fetchProducts = async () => {
     try {
@@ -20,27 +20,32 @@ const CartComponent = () => {
       updateTotalItems(items.length);
     } catch (error) {
       console.log(console.error);
-    }finally{
-        updateLoaderStatus(false);
+    } finally {
+      updateLoaderStatus(false);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchProducts();
-  },[])
+  }, []);
 
   return (
     <div>
       {products.length === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="cart-container">
-          <CartItems />
-          <TotalPriceBox/>
-          
-        </div>
+        <>
+          <div className="cart-container">
+            <div className="cart-items">
+              <CartItems />
+              <TotalPriceBox />
+            </div>
+            <div style={{ textAlign: "center", marginTop:"20px" }}>
+              <img width="60%" src="./images/paymethods2.png" alt="" />
+            </div>
+          </div>
+        </>
       )}
-     
     </div>
   );
 };

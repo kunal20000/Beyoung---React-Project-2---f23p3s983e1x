@@ -43,17 +43,21 @@
   }
 }
 /* CartComponet */
+
 .cart-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #f8f8f8;
     margin: 0 7rem;
-    /* height: 70vh; */
     min-height: 90vh;
     justify-content: space-evenly;
     padding: 2rem 0;
   }
-
+  .cart-items{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
   .address-container{
     display: flex;
     flex-direction: row;
@@ -156,6 +160,10 @@
       align-items: center;
       justify-content: unset;
       gap: 1rem;
+    }
+    .cart-items{
+      display: flex;
+      flex-direction: column;
     }
     .cart-items-container {
       width: 94%;

@@ -1,3 +1,14 @@
+
+.checkout-Container{
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f8f8;
+  margin: 0 7rem;
+  min-height: 90vh;
+  justify-content: space-evenly;
+  padding: 2rem 0;
+}
+
 .payments-container h5{
    font-size: 25px;
 }
@@ -85,6 +96,17 @@
   
   
   @media (max-width: 768px) {
+    .checkout-Container{
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f8f8;
+      margin: 0 0;
+      min-height: 90vh;
+      justify-content: space-evenly;
+      padding: 2rem 0;
+      width: 100%;
+      text-align: center;
+    }
     .checkout-header{
       padding: 0;
     }
