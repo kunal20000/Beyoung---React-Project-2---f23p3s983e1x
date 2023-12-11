@@ -107,3 +107,16 @@
   margin-right: 10px;
   cursor: pointer;
 }
+@media screen and (max-width:768px) {
+  .btn-forAddress{
+    margin: 0;
+    width: 300px;
+  }
+  .shipping-address-container{
+    margin: 0 0;
+  }
+  .add-address-box{
+    width: 300px;
+  }
+
+}

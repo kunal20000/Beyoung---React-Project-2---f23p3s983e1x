@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./myaddress.css";
 import { json } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MyAddress = () => {
   const [showAddAddress, setShowAddAddress] = useState(false);
@@ -41,7 +42,14 @@ const MyAddress = () => {
   }, []);
   const handleSaveAddress = () => {
     // Handle saving the address logic here
+    
 
+    // validate all field 
+
+    if(!formData.fullName || !formData.phoneNumber || !formData.address || !formData.pincode || !formData.city || !formData.state){
+      toast("Please fill all fields");
+      return;
+    }
     // Save the form data in localStorage
     const updatedAddresses = [...savedAddresses, formData];
 

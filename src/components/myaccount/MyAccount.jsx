@@ -35,7 +35,7 @@ const MyAccount = () => {
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("useremail");
     updateLoginStatus(false);
-    toast.success("Logged out succesfully", { position: "bottom-left" });
+    toast.success("Logged out succesfully");
 
     updateCartNumbers(0);
     updateWishlistNumbers(0);

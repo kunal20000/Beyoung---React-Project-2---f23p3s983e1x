@@ -12,9 +12,8 @@ import { useNavigate } from "react-router-dom";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import MyAccountModal from "./MyAccountModal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { getProductsBySearch } from "../utils/getProductApi";
-import "react-toastify/dist/ReactToastify.css";
 import {
   useCartNumbers,
   useUpdateCartNumbers,
@@ -273,7 +272,7 @@ const Navbar = () => {
             </Popper>
           </ClickAwayListener>
         )}
-        <ToastContainer />
+        
       </div>
       <Login isOpen={showModal} closeModal={closeLoginModal} />
       <SignUp isOpen={showModalSignUp} closeModal={closeSignUpModal} />

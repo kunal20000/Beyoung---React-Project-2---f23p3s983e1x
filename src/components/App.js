@@ -82,8 +82,8 @@ function App() {
               </Routes>
               <Loader />
               <Footer />
-              <ToastContainer />
             </div>
+            <ToastContainer  autoClose={3000} position="bottom-left"/>
           </LoaderProvider>
         </CheckoutProvider>
       </CartNumberProvider>
