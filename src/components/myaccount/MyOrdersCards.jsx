@@ -40,19 +40,12 @@ const MyOrdersCards = ({ orderItem }) => {
           </div>
         </section>
         <section className="order-status-btn">
-          <button style={{ display: "flex", alignItems: "center", gap:"0.5rem"}}>
-            <img width="20px" height="20px"
-              src="https://www.beyoung.in/images/common/mdi-light_truck.png"
-              alt=""
-            />
+          <button
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+          >
             Intransit
           </button>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            
-          >
-            Need Help?
-          </button>
+          <button style={{ backgroundColor: "yellow" }}>Need Help?</button>
         </section>
       </Stack>
     </div>
