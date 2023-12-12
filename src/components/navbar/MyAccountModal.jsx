@@ -11,7 +11,7 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modelRef.current && !modelRef.current.contains(event.target)) {
-         closeModal(true);
+        closeModal(true);
       }
     };
     return () => {
@@ -23,39 +23,27 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
       {isOpenHomeModal && (
         <section className="auth-modal" ref={modelRef}>
           <div className="auth-modal-subdiv">
-            <h5>Hello {userName.charAt(0).toUpperCase()+ userName.slice(1)}</h5>
+            <h5>
+              Hello {userName.charAt(0).toUpperCase() + userName.slice(1)}
+            </h5>
             <button onClick={closeModal}>X</button>
           </div>
           <div className="link-container">
-            <Link
-              className="link-direction"
-              to={`myaccount/order`}
-            >
+            <Link className="link-direction" to={`myaccount/order`}>
               Order
             </Link>
 
-            <Link
-              className="link-direction"
-              to={`myaccount/address`}
-            >
+            <Link className="link-direction" to={`myaccount/address`}>
               Address
             </Link>
 
-            <Link
-              className="link-direction"
-              to={`/myaccount/profile`}
-            >
+            <Link className="link-direction" to={`/myaccount/profile`}>
               Profile
             </Link>
 
-            <Link
-              className="link-direction"
-              to={`myaccount/wishlist`}
-            >
+            <Link className="link-direction" to={`myaccount/wishlist`}>
               Wishlist
             </Link>
-
-            
           </div>
         </section>
       )}
