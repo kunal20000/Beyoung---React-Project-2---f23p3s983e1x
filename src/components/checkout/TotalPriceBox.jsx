@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Divider } from "@mui/material";
 import { toast } from "react-toastify";
 import { useUpdateCartNumbers } from "../context/CartNumberContext";
@@ -7,8 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useCheckout } from "../context/CheckoutContext";
 import "./checkout.css";
 import { newOrder } from "../utils/OrderApi";
-import { deleteItemFromCart } from "../utils/CartApi";
+import { clearCart, deleteItemFromCart } from "../utils/CartApi";
 const TotalPriceBox = () => {
+  const [product, setProduct] = useState([]);
+
   const {
     totalItems,
     totalPrice,
@@ -49,7 +51,7 @@ const TotalPriceBox = () => {
   const location = useLocation();
   const currentRoute = location.pathname.split("/");
   const currentPage = currentRoute[currentRoute.length - 1];
-  
+
   const handleCheckout = (e) => {
     e.preventDefault();
     if (currentPage === "cart") {
@@ -66,6 +68,21 @@ const TotalPriceBox = () => {
       } else {
         toast.error("Please verify your payment details again!");
       }
+    }
+  };
+  const handleClearCart = async () => {
+    try {
+      const res = await clearCart();
+      console.log(res);
+      if (res.status === "success") {
+        updateTotalItems(0);
+        setProduct([]);
+        updateProducts([]);
+        updateCart(0);
+        sessionStorage.removeItem("cartItemNums");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
@@ -99,6 +116,7 @@ const TotalPriceBox = () => {
           <span>&#8377;{totalPrice}</span>
         </p>
         <button onClick={handleCheckout}>checkout securely</button>
+        <button style={{background:"Yellow", color:"rgba(0,0,0,0.9)"}} onClick={handleClearCart}>Clear Cart</button>
       </section>
     </div>
   );

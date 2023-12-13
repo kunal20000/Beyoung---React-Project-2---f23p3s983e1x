@@ -55,10 +55,10 @@ const MyAccount = () => {
             <Avatar
               sx={{ height: "100px", width: "100px", background: "black" }}
             >
-              {name.charAt(0).toUpperCase() + name.slice(1)}
+               {name}
                 
             </Avatar>
-            <Typography sx={{ textTransform: "uppercase" }} variant="h6">
+            <Typography variant="h6" style={{ fontSize: '16px' }} >
               {name}
             </Typography>
             <Typography sx={{ color: "gray" }} variant="subtitle1">

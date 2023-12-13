@@ -21,13 +21,13 @@ const ProductsListComponent = ({ products, pageNo }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   let heading = "shop all";
-
+  // the heading based on the values of URL parameters.
   for (const value of params.values()) {
     if (value) {
       heading = value;
     }
   }
-
+  // utility functions for obtaining unique values and initializing filters based on product data
   const uniqueValues = (arr, key) => {
     if (!Array.isArray(arr)) {
       return [];

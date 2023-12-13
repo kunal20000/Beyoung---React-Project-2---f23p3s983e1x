@@ -24,7 +24,9 @@ const MyAccountModal = ({ isOpenHomeModal, closeModal }) => {
         <section className="auth-modal" ref={modelRef}>
           <div className="auth-modal-subdiv">
             <h5>
-              Hello {userName.charAt(0).toUpperCase() + userName.slice(1)}
+              Hello{" "}
+              {userName.split(" ")[0].charAt().toUpperCase() +
+                userName.split(" ")[0].slice(1)}
             </h5>
             <button onClick={closeModal}>X</button>
           </div>

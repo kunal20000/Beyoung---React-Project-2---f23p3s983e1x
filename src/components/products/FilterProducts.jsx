@@ -10,6 +10,7 @@ import {
   Chip,
 } from "@mui/material";
 
+// parameters for the dropdown menu's  item height, padding, and menu properties
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -26,6 +27,7 @@ const FilterProducts = ({ values, type, filter, setFilter }) => {
   // console.log("values, type, filter",values, type, filter);
   const [selectedValues, setSelectedValues] = useState(filter[type] || []);
 
+  //This useEffect updates the selected values when the filter or type props change.
   useEffect(() => {
     setSelectedValues(filter[type] || []);
   }, [filter, type]);

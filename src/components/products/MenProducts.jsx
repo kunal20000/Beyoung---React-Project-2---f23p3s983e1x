@@ -26,10 +26,12 @@ const MenProducts = () => {
     }
   };
 
+
+  // this useEffect will filter state based on search parameters in the  url
   useEffect(() => {
     let filter = {};
     searchParams.forEach((value, key) => {
-      filter[key] = value.replace(/-/g, " ");
+      filter[key] = value.replace(/-/g, " "); // replace all hyphens in value
     });
     setFilter(filter);
   }, [searchParams]);
@@ -37,7 +39,7 @@ const MenProducts = () => {
   useEffect(() => {
     fetchProduct();
   }, [filter, page]);
-
+  
   return (
     <div>
       <div className="men-clothing-main">

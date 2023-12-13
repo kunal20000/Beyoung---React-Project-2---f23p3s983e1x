@@ -42,13 +42,34 @@ const MyAddress = () => {
   }, []);
   const handleSaveAddress = () => {
     // Handle saving the address logic here
-    
 
-    // validate all field 
+    // validate all field
 
-    if(!formData.fullName || !formData.phoneNumber || !formData.address || !formData.pincode || !formData.city || !formData.state){
+    if (
+      !formData.fullName ||
+      !formData.phoneNumber ||
+      !formData.address ||
+      !formData.pincode ||
+      !formData.city ||
+      !formData.state
+    ) {
       toast("Please fill all fields");
       return;
+    }
+
+    // Check if the form data has an index property (indicating it's an edited address)
+    if (formData.hasOwnProperty("index")) {
+      // If it does, update the address at the specified index
+      const updatedAddresses = savedAddresses.map((address, index) =>
+        index === formData.index ? formData : address
+      );
+      localStorage.setItem("addresses", JSON.stringify(updatedAddresses));
+      setSaveAddresses(updatedAddresses);
+    } else {
+      // If not, add the new address to the list
+      const updatedAddresses = [...savedAddresses, formData];
+      localStorage.setItem("addresses", JSON.stringify(updatedAddresses));
+      setSaveAddresses(updatedAddresses);
     }
     // Save the form data in localStorage
     const updatedAddresses = [...savedAddresses, formData];
@@ -65,16 +86,14 @@ const MyAddress = () => {
       city: "",
       state: "",
     });
-    setSaveAddresses(updatedAddresses);
+  
     setShowAddAddress(false);
   };
-
-  
 
   const handleEditAddress = (index) => {
     // Set the form data to the selected address for editing
     const selectedAddress = savedAddresses[index];
-    setFormData(selectedAddress);
+    setFormData({ ...selectedAddress, index });
 
     // Show the add address box for editing
     setShowAddAddress(true);

@@ -185,7 +185,7 @@ const MyProfile = () => {
   return (
     <div className="my-profile-section">
       <Avatar sx={{ height: "100px", width: "100px", background: "black" }}>
-        {currentName.charAt(0).toUpperCase() + currentName.slice(1)}
+        {currentName.split().map((word)=>word[0].toUpperCase()).join(" ")}
       </Avatar>
       <Grid sx={{ margin: "2rem 4rem" }} container spacing={2}>
         <Grid item xs={12}>

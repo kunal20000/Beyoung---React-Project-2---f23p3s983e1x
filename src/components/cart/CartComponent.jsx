@@ -5,11 +5,13 @@ import { useCheckout } from "../context/CheckoutContext";
 import { useLoader } from "../context/LoaderContext";
 import { getCartItems } from "../utils/CartApi";
 import TotalPriceBox from "../checkout/TotalPriceBox";
+import { useUpdateCartNumbers } from "../context/CartNumberContext";
 
 const CartComponent = () => {
   const { products, updateProducts, updateTotalItems, updateTotalPrice } =
     useCheckout();
   const { updateLoaderStatus } = useLoader();
+  const updateCartNumbers = useUpdateCartNumbers();
   const fetchProducts = async () => {
     try {
       updateLoaderStatus(true);
@@ -29,18 +31,21 @@ const CartComponent = () => {
     fetchProducts();
   }, []);
 
+ 
+
   return (
     <div>
       {products.length === 0 ? (
         <EmptyCart />
       ) : (
         <>
+          
           <div className="cart-container">
             <div className="cart-items">
               <CartItems />
               <TotalPriceBox />
             </div>
-            <div style={{ textAlign: "center", marginTop:"20px" }}>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
               <img width="60%" src="./images/paymethods2.png" alt="" />
             </div>
           </div>
