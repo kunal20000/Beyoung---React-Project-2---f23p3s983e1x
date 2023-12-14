@@ -104,4 +104,10 @@
   .my-ac-left-section .collaps-active {
     display: flex;
   }
+  .my-profile-section{
+    width: 90%;
+  }
+  .update-btn{
+    width: 90%;
+  }
 }
