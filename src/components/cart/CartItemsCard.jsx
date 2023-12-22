@@ -21,7 +21,7 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
   } = product;
 
   // console.log("quantity", quantity);
-  const { updateTotalItems, updateTotalPrice } = useCheckout();
+  const { updateTotalItems, updateTotalPrice, totalPrice } = useCheckout();
 
   const [qty, setQty] = useState(quantity);
   // console.log("qty", qty)
@@ -32,7 +32,10 @@ const CartItemsCard = ({ product, removeProductFromState }) => {
 
   const handleQtyChange = (event) => {
     const {value} = event.target;
+    
+    updateTotalPrice(totalPrice-(qty*price)+(value*price));
     setQty(value);
+
   };
 
   const removeItemFromCart = async (_id) => {
