@@ -42,14 +42,14 @@ const ProductComponent = () => {
 
   const fetchProduct = async () => {
     try {
-      updateLoaderStatus(true)
+      updateLoaderStatus(true);
       const res = await getProductById(id);
       setProduct(res);
       setSelectedImage(res.displayImage); // Set default image
       console.log(res);
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       updateLoaderStatus(false);
     }
   };
@@ -68,7 +68,7 @@ const ProductComponent = () => {
   const handleAddToCart = async () => {
     if (loginStatus) {
       try {
-         updateLoaderStatus(true);
+        updateLoaderStatus(true);
         const res = await addItemToCart(id, selectedQty);
         if (res.status === "success") {
           toast.success(res.message);
@@ -139,7 +139,7 @@ const ProductComponent = () => {
             Inclusive of All Taxes + Free Shipping
           </span>
           <section className="rating-container">
-           <Rating name="read-only" value={randomRating} readOnly/>
+            <Rating name="read-only" value={randomRating} readOnly />
             &nbsp;
             <p>
               {randomRating} ratings and{" "}
@@ -202,34 +202,8 @@ const ProductComponent = () => {
         <div className="product-details-section">
           <div className="product-details-box">
             <h5>Product Highlights</h5>
-            <content>
-              {product.description}
-            </content>
+            <content>{product.description}</content>
           </div>
-          {/* <div className="product-details-box">
-            <h5>Product Highlights</h5>
-            <content>
-              Fabric Stretch Denim Weave Type Twill Fade Light Blue Fit Slim
-              Tapered Fit Pocket 5 Pockets Waist Rise Mid-Rise Wash Indigo Wash
-              Style Everyday Casuals
-            </content>
-          </div>
-          <div className="product-details-box">
-            <h5>Product Highlights</h5>
-            <content>
-              Fabric Stretch Denim Weave Type Twill Fade Light Blue Fit Slim
-              Tapered Fit Pocket 5 Pockets Waist Rise Mid-Rise Wash Indigo Wash
-              Style Everyday Casuals
-            </content>
-          </div>
-          <div className="product-details-box">
-            <h5>Product Highlights</h5>
-            <content>
-              Fabric Stretch Denim Weave Type Twill Fade Light Blue Fit Slim
-              Tapered Fit Pocket 5 Pockets Waist Rise Mid-Rise Wash Indigo Wash
-              Style Everyday Casuals
-            </content>
-          </div> */}
         </div>
       </div>
       <div className="ratings-review-container">

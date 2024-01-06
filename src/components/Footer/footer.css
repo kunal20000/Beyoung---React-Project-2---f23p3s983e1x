@@ -108,6 +108,7 @@ p.footer-heading {
 }
 @media (max-width: 768px) {
   .footer-container {
+    
   }
   .foot-container-1 {
     display: flex;

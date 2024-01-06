@@ -52,7 +52,6 @@
 }
 .header_container {
   background: #fff;
- 
 }
 
 /* .header_container.fixed-header{
@@ -111,7 +110,7 @@ ul {
 .menuBar li .menu-title:hover {
   background-color: yellow;
 }
-.right{
+.right {
   display: flex;
   gap: 0.3rem;
 }
@@ -140,22 +139,32 @@ ul {
     text-transform: uppercase;
     height: 2.3rem;
     cursor: pointer;
-    
   }
 }
 .wishlist-icon {
   margin-left: 18px;
 }
-.cart-icon{
+.cart-icon {
   background: none;
   border: none;
   list-style: none;
 }
 
-@media screen and (max-width: 667px) {
+/* @media screen and (max-width: 768px) {
   .navbar {
     width: 100%;
     text-align: center;
+  }
+  .menuBar {
+    display: none;
+  }
+} */
+@media screen and (max-width: 768px) {
+  .navbar.small-screen {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 0 0;
+    /* Add other styles for small screens */
   }
   .menuBar {
     display: none;

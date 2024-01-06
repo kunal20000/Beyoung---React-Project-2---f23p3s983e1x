@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./navbar.css";
-import { Badge, ClickAwayListener, Popper, TextField } from "@mui/material";
+import { Badge, ClickAwayListener, Container, Popper, TextField, useMediaQuery } from "@mui/material";
 import { ReactComponent as LocationLogo } from "../asset/location.svg";
 import { ReactComponent as BeyoungLogo } from "../asset/beyoung.svg";
 import { ReactComponent as SearchLogo } from "../asset/searchbar.svg";
@@ -50,6 +50,7 @@ const Navbar = () => {
   const setShowLoginModal = userUpdateLoginModalStatus();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const isSmallScreen = useMediaQuery("(max-width: 769px)");
   const handleLogout = () => {
     sessionStorage.removeItem("userInfo");
     sessionStorage.removeItem("authToken");
@@ -127,7 +128,9 @@ const Navbar = () => {
   const closeMyAccountModal = (e) => {
     setModalHome(false);
   };
-
+  // useEffect(()=>{
+  //   const navbar = document.querySelector("")
+  // })
   return (
     <header>
       <div className="navbar">
@@ -178,7 +181,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="header_container fixed-header">
+      <div className="header_container">
         {/* <div className="fixedHeader"> */}
           <div className="container">
             <div className="left">
