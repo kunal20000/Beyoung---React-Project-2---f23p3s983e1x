@@ -99,7 +99,7 @@ const Login = ({ isOpen, closeModal }) => {
       }
     } catch (err) {
       setErr(true);
-      toast.error("Something went wrong!Please try again later.");
+      toast.error(err.response.data.message);
       console.log(err);
     } finally {
       setLoader(false);

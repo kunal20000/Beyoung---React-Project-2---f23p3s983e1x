@@ -182,6 +182,9 @@ span.discounted-text {
     display: flex;
     flex-direction: column;
   }
+  .product-left img{
+    width: 345px;
+  }
   .btn-cart-buy .btn-cart{
     width: 45%;
     font-size: 12px;
@@ -193,10 +196,6 @@ span.discounted-text {
   .review-section-left p{
     font-size: 20px;
   }
-  /* .ratings-review-container{
-    height: fit-content;
-    width: fit-content;
-  } */
   
 }
 .product-info-container {
@@ -303,5 +302,15 @@ span.discounted-text {
 @media (max-width: 768px) {
   .ratings-review-section {
     padding: 0;
+    gap: 1rem;
+  }
+  .review-section-left{
+    width: 25%;
+  }
+  .review-section-right .rating-bar{
+   padding-right: 0px;
+  }
+  .about-us-container ul li{
+    font-size: 12px;
   }
 }

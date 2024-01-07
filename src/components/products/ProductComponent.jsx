@@ -39,7 +39,7 @@ const ProductComponent = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const { updateProducts, updateTotalItems, updateTotalPrice } = useCheckout();
   const [selectedSize, setSelectedSize] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
   const fetchProduct = async () => {
     try {
       updateLoaderStatus(true);
@@ -84,7 +84,7 @@ const ProductComponent = () => {
         updateLoaderStatus(false);
       }
     } else {
-      setShowLoginModal(true);
+      toast.error("Login First");
     }
   };
 
@@ -102,7 +102,7 @@ const ProductComponent = () => {
       updateTotalPrice(product.price * selectedQty);
       navigate("/cart");
     } else {
-      setShowLoginModal(true);
+      toast.error("Login First");
     }
   };
   const sizes = ["S", "M", "L", "XL"];

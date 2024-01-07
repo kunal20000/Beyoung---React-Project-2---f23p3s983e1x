@@ -9,6 +9,7 @@ import {
   Box,
   Chip,
 } from "@mui/material";
+import './product.css';
 
 // parameters for the dropdown menu's  item height, padding, and menu properties
 const ITEM_HEIGHT = 48;
@@ -42,7 +43,7 @@ const FilterProducts = ({ values, type, filter, setFilter }) => {
     }));
   };
   return (
-    <FormControl
+    <FormControl className="formMediaQuery"
       variant="standard"
       size="small"
       sx={{ m: 1, width: "100%", margin: 0 }}
